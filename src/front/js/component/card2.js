@@ -67,7 +67,7 @@ export const Card2 = () => {
                   </div>
                 </div>
                 {/*   <!-- Team Details--> */}
-                <Link to={"/entrevistas/"+invitado.name}>
+                <Link to={"/entrevistas/"+invitado.id+"/"+invitado.name}>
                 <div class="single_advisor_details_info">
                   <h6>{invitado.name}</h6>
                   <p class="designation">{invitado.position}</p>

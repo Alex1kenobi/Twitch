@@ -9,11 +9,13 @@ export const InterviewerProfile = () => {
   const { store, actions } = useContext(Context);
   const [question, setQuestion] = useState({});
 
-  let { name } = useParams();
+  let { id } = useParams();
 
   useEffect(() => {
-    actions.getEntrevistado(name);
+    actions.getEntrevistado(id);
+
   }, []);
+console.log (store.preguntas_entrevistado)
 
   return (
     <div>
@@ -116,15 +118,21 @@ export const InterviewerProfile = () => {
                   <div>
                     <div class="card" style={{ width: "18rem" }}>
                       <div class="card-body">
-                        <h5 class="card-title">
-                          {store.preguntas_entrevistado.user}
-                        </h5>
-                        <p class="card-text">
-                          {store.preguntas_entrevistado.text}
-                        </p>
-                        <p class="card-text">
-                          {store.preguntas_entrevistado.category}
-                        </p>
+                        {store.preguntas_entrevistado.length >0   ? store.preguntas_entrevistado.map((indexPregunta) => {
+                          return (
+                            <>
+                              <h5 class="card-title">
+                                {indexPregunta.user}
+                              </h5>
+                              <p class="card-text">
+                                {indexPregunta.text}
+                              </p>
+                              <p class="card-text">
+                                {indexPregunta.category}
+                              </p>
+                            </>
+                          );
+                        }): <p>Escribe tu pregunta</p>}
 
                         <div class="input-group">
                           <button

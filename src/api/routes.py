@@ -77,9 +77,9 @@ def getEntrevistados():
     entrevistados = Interviewer.query.all()
     return jsonify ({"Entrevistados": list(map(lambda x:x.serialize(), entrevistados))}), 200
 
-@api.route('/entrevistados/<name>', methods=['GET'])
-def getEntrevistado(name): 
-    entrevistado = Interviewer.query.filter_by(name=name).first()
+@api.route('/entrevistados/<int:id>', methods=['GET'])
+def getEntrevistado(id): 
+    entrevistado = Interviewer.query.filter_by(id=id).first()
     return jsonify ({"Entrevistado": entrevistado.serialize()}), 200
 
 @api.route('/preguntas', methods=['POST'])
@@ -102,12 +102,12 @@ def getcategory():
     categories = Category.query.all()
     return jsonify ({"Categories": list(map(lambda x:x.serialize(), categories))}), 200
 
-@api.route('/preguntas/<int:id>', methods=['GET'])
+@api.route('/preguntas/entrevistado/<int:id>', methods=['GET'])
 def getPreguntasEntrevistado(id): 
-    print ("@@@@@@@@", id)
+    
     pregunta = Question.query.filter_by(interviewer_id=id).first()
     if pregunta:
-        
+        print ("@@@@@@@@", pregunta)
         return jsonify ({"Preguntas": pregunta.serialize()}), 200
     else:
-        return jsonify ({"Preguntas": []})
+        return jsonify ({"Message": "No hay preguntas"})

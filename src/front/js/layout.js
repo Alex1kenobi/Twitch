@@ -38,7 +38,7 @@ const Layout = () => {
                         <Route element={<Login/>} path="/login"/>
                         <Route element={<QuestionList/>} path="/question-list"/>
                         <Route element={<Interview/>} path="/entrevistas"/>
-                        <Route element={<InterviewerProfile/>} path="/entrevistas/:name"/> {/* Este name es el que se relaciona con el Useparams */}
+                        <Route element={<InterviewerProfile/>} path="/entrevistas/:id/:name"/> {/* Este name es el que se relaciona con el Useparams */}
                         <Route element={<UserProfile />} path="/user-profile" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

@@ -102,10 +102,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		  }
 		},
   
-		getEntrevistado: async (name) => {
+		getEntrevistado: async (id) => {
 		  try {
 			// fetching data from the backend
-			const resp = await fetch(process.env.BACKEND_URL + "/api/entrevistados/"+name, {
+			const resp = await fetch(process.env.BACKEND_URL + "/api/entrevistados/"+id, {
 			  method: "GET",
 			  headers: {
 				  "Content-Type": "application/json",
@@ -113,9 +113,9 @@ const getState = ({ getStore, getActions, setStore }) => {
   
 			});
 			const data = await resp.json();
-			setStore({ entrevistado: data.Entrevistado });
-			const preguntas = await getActions().getPreguntasEntrevistado (data.Entrevistado.id)
-			// don't forget to return something, that is how the async resolves
+			setStore({ entrevistado: data.Entrevistado, preguntas_entrevistado: data.Entrevistado.questions});
+		 	
+		// don't forget to return something, that is how the async resolves
 		  } catch (error) {
 			console.log("Error loading message from backend", error);
 		  }
@@ -152,8 +152,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			const data = await resp.json();
 			
 			setStore({ message:data.message });
-			const getPreguntas = await getActions().getPreguntasEntrevistado(data.question.interviewer_id)
-			// don't forget to return something, that is how the async resolves
+		getActions().getPreguntasEntrevistado(data.question.interviewer_id)
+		// don't forget to return something, that is how the async resolves
 		  } catch (error) {
 			console.log("Error loading message from backend", error);
 		  }
@@ -162,7 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		getPreguntasEntrevistado: async (id) => {
 		  try {
 			// fetching data from the backend
-			const resp = await fetch(process.env.BACKEND_URL + "/api/preguntas/" +id, { // +id es lo que está en el routes línea 108, pero con otra nomenclatura
+			const resp = await fetch(process.env.BACKEND_URL + "/api/preguntas/entrevistado/" +id, { // +id es lo que está en el routes línea 108, pero con otra nomenclatura
 			  method: "GET",
 			  headers: {
 				  "Content-Type": "application/json",
@@ -170,8 +170,9 @@ const getState = ({ getStore, getActions, setStore }) => {
   
 			});
 			const data = await resp.json();
-			setStore({ preguntas_entrevistado: data.Preguntas }); // "preguntas": esto tiene que ser igual a lo que hay entre comillas del Jsonify de la 111 del routes
-			// don't forget to return something, that is how the async resolves
+			console.log (data)
+/* 			setStore({ preguntas_entrevistado: data.Preguntas }); // "preguntas": esto tiene que ser igual a lo que hay entre comillas del Jsonify de la 111 del routes
+ */			// don't forget to return something, that is how the async resolves
 		  } catch (error) {
 			console.log("Error loading message from backend", error);
 		  }

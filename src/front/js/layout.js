@@ -4,11 +4,21 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
+import { Demo2 } from "./pages/demo2";
 import { Single } from "./pages/single";
+import { Login } from "./pages/login";
+import { UserProfile } from "./pages/user-profile";
+import { Interview } from "./pages/interview";
+import { QuestionList } from "./pages/question-list";
+import { InterviewerProfile } from "./pages/interviewer-profile"
+
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
+
 
 //create your first component
 const Layout = () => {
@@ -20,11 +30,16 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Demo2/>} path="/demo2"/>
+                        <Route element={<Login/>} path="/login"/>
+                        <Route element={<QuestionList/>} path="/question-list"/>
+                        <Route element={<Interview/>} path="/entrevistas"/>
+                        <Route element={<InterviewerProfile/>} path="/entrevistas/:name"/> {/* Este name es el que se relaciona con el Useparams */}
+                        <Route element={<UserProfile />} path="/user-profile" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

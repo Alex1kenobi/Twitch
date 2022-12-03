@@ -162,7 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
   
 		getPreguntasPerfil: async () => {
-		  try {
+		 
 			// fetching data from the backend
 			const resp = await fetch(process.env.BACKEND_URL + "/api/preguntas/perfil/", { // +id es lo que está en el routes línea 108, pero con otra nomenclatura
 			  method: "GET",
@@ -173,12 +173,11 @@ const getState = ({ getStore, getActions, setStore }) => {
   
 			});
 			const data = await resp.json();
-			console.log (data)
-			setStore({ preguntas_perfil: data.Preguntas }); // "preguntas": esto tiene que ser igual a lo que hay entre comillas del Jsonify de la 111 del routes
-		// don't forget to return something, that is how the async resolves
-		  } catch (error) {
-			console.log("Error loading message from backend", error);
-		  }
+			
+			const store = await setStore({ preguntas_perfil: data.Preguntas }); // "preguntas": esto tiene que ser igual a lo que hay entre comillas del Jsonify de la 111 del routes
+			console.log (store, "@@@@@@@2!!!!!!")
+			// don't forget to return something, that is how the async resolves
+		 
 		},
   
 		logout: () => {

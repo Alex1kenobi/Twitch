@@ -106,8 +106,6 @@ def getcategory():
 @jwt_required()
 def getPreguntasPerfil(): 
     user_id = get_jwt_identity ()
-
-
     pregunta = Question.query.filter_by(user_id=user_id).first()
     if pregunta:
         print ("@@@@@@@@", pregunta)

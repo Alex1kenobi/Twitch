@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/question-table.css";
+import { Context } from "../store/appContext";
 
 export const QuestionTable = () => {
+  const { store, actions } = useContext(Context);
+  console.log(store.preguntas_perfil);
+
   return (
     <div class="padding">
       <div class="row container d-flex justify-content-center">
@@ -18,52 +22,20 @@ export const QuestionTable = () => {
                   <thead>
                     <tr>
                       <th>Entrevistado</th>
+                      <th>Categoría</th>
                       <th>Pregunta</th>
-                      <th>Created On</th>
-                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Samso Park</td>
-                      <td>34424433</td>
-                      <td>12 May 2017</td>
-                      <td>
-                        <label class="badge badge-danger">Pending</label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Marlo Sanki</td>
-                      <td>53425532</td>
-                      <td>15 May 2015</td>
-                      <td>
-                        <label class="badge badge-warning">In progress</label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>John ryte</td>
-                      <td>53275533</td>
-                      <td>14 May 2017</td>
-                      <td>
-                        <label class="badge badge-info">Fixed</label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Peter mark</td>
-                      <td>53275534</td>
-                      <td>16 May 2017</td>
-                      <td>
-                        <label class="badge badge-success">Completed</label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Dave</td>
-                      <td>53275535</td>
-                      <td>20 May 2017</td>
-                      <td>
-                        <label class="badge badge-warning">In progress</label>
-                      </td>
-                    </tr>
+                    {store.preguntas_perfil ? store.preguntas_perfil.map((cadapregunta) => {
+                      return (
+                        <tr>
+                          <td>{cadapregunta.interviewer}</td>
+                          <td>{cadapregunta.category}</td>
+                          <td>{cadapregunta.text}</td>
+                        </tr>
+                      );
+                    }): null}
                   </tbody>
                 </table>
               </div>

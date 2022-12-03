@@ -89,7 +89,7 @@ def preguntas():
     body_text = request.json.get("text")
     body_interviewer_id = request.json.get("interviewer_id")
     body_category_id = request.json.get("category_id")
-    if body_text:
+    if body_text and body_category_id:
         question = Question (text=body_text, interviewer_id = body_interviewer_id, category_id = body_category_id, user_id = user_id)
         db.session.add(question)
         db.session.commit()
@@ -102,10 +102,13 @@ def getcategory():
     categories = Category.query.all()
     return jsonify ({"Categories": list(map(lambda x:x.serialize(), categories))}), 200
 
-@api.route('/preguntas/entrevistado/<int:id>', methods=['GET'])
-def getPreguntasEntrevistado(id): 
-    
-    pregunta = Question.query.filter_by(interviewer_id=id).first()
+@api.route('/preguntas/perfil/', methods=['GET'])
+@jwt_required()
+def getPreguntasPerfil(): 
+    user_id = get_jwt_identity ()
+
+
+    pregunta = Question.query.filter_by(user_id=user_id).first()
     if pregunta:
         print ("@@@@@@@@", pregunta)
         return jsonify ({"Preguntas": pregunta.serialize()}), 200

@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/profile-dashboard.css";
 import "../../styles/profile.css";
 import { QuestionTable } from "../component/question-table";
+
 
 /* 
 import { MdLocationPin, MdEmail } from "react-icons/md"; */
@@ -26,6 +27,10 @@ export const UserProfile = () => {
     });
   };
 
+  useEffect(() => {
+    actions.getPreguntasPerfil();
+
+  }, []);
 
   
   return (

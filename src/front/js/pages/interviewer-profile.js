@@ -7,15 +7,29 @@ import "../../styles/interviewer-profile.css";
 
 export const InterviewerProfile = () => {
   const { store, actions } = useContext(Context);
-  const [question, setQuestion] = useState({});
+  const [text, setText] = useState("");
+
+  const [selectcategory, setSelectcategory] = useState("");
+  const [mensaje, setMensaje] = useState("");
 
   let { id } = useParams();
 
   useEffect(() => {
     actions.getEntrevistado(id);
-
   }, []);
-console.log (store.preguntas_entrevistado)
+  console.log(store.categories);
+
+  const handleQuestion = async () => {
+    await actions.preguntas(
+      store.entrevistado.id,
+      text,
+      selectcategory
+    );
+    setText("");
+    setSelectcategory("");
+    setMensaje(store.message_response);
+
+  }
 
   return (
     <div>
@@ -38,25 +52,6 @@ console.log (store.preguntas_entrevistado)
                       <div class="name">
                         <h3 class="title">{store.entrevistado.name}</h3>
                         <h6>{store.entrevistado.position}</h6>
-
-                        {/* <a
-                          href="#pablo"
-                          class="btn btn-just-icon btn-link btn-dribbble"
-                        >
-                          <i class="fa fa-dribbble"></i>
-                        </a>
-                        <a
-                          href="#pablo"
-                          class="btn btn-just-icon btn-link btn-twitter"
-                        >
-                          <i class="fa fa-twitter"></i>
-                        </a>
-                        <a
-                          href="#pablo"
-                          class="btn btn-just-icon btn-link btn-pinterest"
-                        >
-                          <i class="fa fa-pinterest"></i>
-                        </a> */}
                       </div>
                       <p>{store.entrevistado.description}</p>
                     </div>
@@ -64,21 +59,19 @@ console.log (store.preguntas_entrevistado)
                 </div>
 
                 <div classname="needs-validation">
+                  {store.logged ? ( <>
                   <div for="validationCustom04" class="form-label">
                     <select
                       class="form-select"
                       aria-label="Floating label select example"
                       id="validationCustom04"
                       required
+                      value={selectcategory}
                       onChange={(e) => {
-                        setQuestion({
-                          ...question,
-                          interviewer_id: store.entrevistado.id,
-                          category_id: e.target.value,
-                        });
+                        setSelectcategory(e.target.value);
                       }}
                     >
-                      <option selected disabled>
+                      <option selected disabled value="">
                         Selecciona una opción
                       </option>
                       {store.categories.map((category) => {
@@ -98,68 +91,131 @@ console.log (store.preguntas_entrevistado)
                       placeholder="Leave a comment here"
                       id="floatingTextarea2"
                       style={{ height: "100px" }}
+                      value={text}
                       onChange={(e) => {
-                        setQuestion({ ...question, text: e.target.value });
+                        setText(e.target.value);
                       }}
                     ></textarea>
                     <label for="floatingTextarea2">Pon aquí tu pregunta</label>
                   </div>
 
+                  <p>{mensaje}</p>
                   <button
                     type="submit"
                     class="btn btn-primary"
-                    onClick={() => {
-                      actions.preguntas(question);
+                    onClick={ async () => {
+                      handleQuestion()
                     }}
                   >
                     Enviar
                   </button>
+                  </>
+) : ( <>
 
+
+<div for="validationCustom04" class="form-label">
+                    <select
+                      class="form-select"
+                      aria-label="Floating label select example"
+                      id="validationCustom04"
+                      required
+                      value={selectcategory}
+                      onChange={(e) => {
+                        setSelectcategory(e.target.value);
+                      }}
+                    disabled>
+                      <option selected disabled value="">
+                        Selecciona una opción
+                      </option>
+                      {store.categories.map((category) => {
+                        return (
+                          <>
+                            <option value={category.id}>{category.name}</option>
+                          </>
+                        );
+                      })}
+                    </select>
+                    <label for="floatingSelect"></label>
+                  </div>
+
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Leave a comment here"
+                      id="floatingTextarea2"
+                      style={{ height: "100px" }}
+                      value={text}
+                      onChange={(e) => {
+                        setText(e.target.value);
+                      }}
+                      disabled
+                    ></textarea>
+                    <label for="floatingTextarea2">Inicia sesión para hacer una pregunta</label>
+                  </div>
+
+                  <p>{mensaje}</p>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    onClick={ async () => {
+                      handleQuestion()
+                    }}
+                    disabled>
+                    Enviar
+                  </button>
+
+</>
+ 
+) }
                   <div>
-                    <div class="card" style={{ width: "18rem" }}>
-                      <div class="card-body">
-                        {store.preguntas_entrevistado.length >0   ? store.preguntas_entrevistado.map((indexPregunta) => {
-                          return (
-                            <>
-                              <h5 class="card-title">
-                                {indexPregunta.user}
-                              </h5>
-                              <p class="card-text">
-                                {indexPregunta.text}
-                              </p>
-                              <p class="card-text">
-                                {indexPregunta.category}
-                              </p>
-                            </>
-                          );
-                        }): <p>Escribe tu pregunta</p>}
+                    {store.preguntas_entrevistado.length > 0 ? (
+                      store.preguntas_entrevistado.map((indexPregunta) => {
+                        return (
+                          <div className="card-group">
+                            <div class="card" style={{ width: "18rem" }}>
+                              <div class="card-body">
+                                <>
+                                  <h5 class="card-title">
+                                    {indexPregunta.user}
+                                  </h5>
+                                  <p class="card-text">{indexPregunta.text}</p>
+                                  <p class="card-text">
+                                    {indexPregunta.category}
+                                  </p>
+                                </>
 
-                        <div class="input-group">
-                          <button
-                            type="button"
-                            class="btn btn-primary fas fa-thumbs-up"
-                          >
-                            Like
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-primary fas fa-thumbs-down"
-                          >
-                            Dislike
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-primary fas fa-meh-rolling-eyes"
-                          >
-                            Pregunta troll
-                          </button>
+                                <div class="input-group">
+                                  <button
+                                    type="button"
+                                    class="btn btn-primary fas fa-thumbs-up"
+                                  >
+                                    Like
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-primary fas fa-thumbs-down"
+                                  >
+                                    Dislike
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-primary fas fa-meh-rolling-eyes"
+                                  >
+                                    Pregunta troll
+                                  </button>
 
-                          <a href="#" class="btn btn-primary">
-                            Borrar Pregunta
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                                  <a href="#" class="btn btn-primary">
+                                    Borrar Pregunta
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p>Escribe tu pregunta</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -167,76 +223,6 @@ console.log (store.preguntas_entrevistado)
           </div>
         </body>
       </div>
-
-      {/* <div classname="needs-validation">
-        <div for="validationCustom04" class="form-label">
-          <select
-            class="form-select"
-            aria-label="Floating label select example"
-            id="validationCustom04"
-            required
-            onChange={(e) => {
-              setQuestion({
-                ...question,
-                interviewer_id: store.entrevistado.id,
-                category_id: e.target.value,
-              });
-            }}
-          >
-            <option selected disabled>
-              Selecciona una opción
-            </option>
-            {store.categories.map((category) => {
-              return (
-                <>
-                  <option value={category.id}>{category.name}</option>
-                </>
-              );
-            })}
-          </select>
-          <label for="floatingSelect"></label>
-        </div>
-
-        <div class="form-floating">
-          <textarea
-            class="form-control"
-            placeholder="Leave a comment here"
-            id="floatingTextarea2"
-            style={{ height: "100px" }}
-            onChange={(e) => {
-              setQuestion({ ...question, text: e.target.value });
-            }}
-          ></textarea>
-          <label for="floatingTextarea2">Pon aquí tu pregunta</label>
-        </div>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          onClick={() => {
-            actions.preguntas(question);
-          }}
-        >
-          Submit
-        </button>
-
-        <div>
-          <div class="card" style={{ width: "18rem" }}>
-            <div class="card-body">
-              <h5 class="card-title">{store.preguntas_entrevistado.user}</h5>
-              <p class="card-text">{store.preguntas_entrevistado.text}</p>
-              <p class="card-text">{store.preguntas_entrevistado.category}</p>
-              <a href="#" class="btn btn-primary">
-                Go somewhere
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {store.entrevistado.name}
-        <img src={store.entrevistado.photo} />
-        {store.entrevistado.description}
-      </div> */}
     </div>
   );
 };

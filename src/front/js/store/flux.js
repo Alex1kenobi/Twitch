@@ -8,7 +8,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		entrevistados: [],
 		entrevistado: {},
 		categories: [],
-		preguntas_entrevistado: []
+		preguntas_entrevistado: [],
+		preguntas_perfil: [],
+		message_response: null,
 	  },
 	  actions: {
 		login: async (user) => {
@@ -140,39 +142,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
   
   
-		preguntas: async (question) => {
+		preguntas: async (interviewer, text, selectcategory) => {
 		  try {
 			// fetching data from the backend
 			const resp = await fetch(process.env.BACKEND_URL + "/api/preguntas", {
 			  method: "POST",
 			  headers: { "Content-Type": "application/json",Authorization: "Bearer " + localStorage.getItem("token"),},
   
-			  body: JSON.stringify(question),
+			  body: JSON.stringify({interviewer_id: interviewer, text: text, category_id: selectcategory}),
 			});
 			const data = await resp.json();
 			
-			setStore({ message:data.message });
-		getActions().getPreguntasEntrevistado(data.question.interviewer_id)
+			setStore({ message_response:data.message });
+		getActions().getEntrevistado(data.question.interviewer_id)
 		// don't forget to return something, that is how the async resolves
 		  } catch (error) {
 			console.log("Error loading message from backend", error);
 		  }
 		},
   
-		getPreguntasEntrevistado: async (id) => {
+		getPreguntasPerfil: async () => {
 		  try {
 			// fetching data from the backend
-			const resp = await fetch(process.env.BACKEND_URL + "/api/preguntas/entrevistado/" +id, { // +id es lo que está en el routes línea 108, pero con otra nomenclatura
+			const resp = await fetch(process.env.BACKEND_URL + "/api/preguntas/perfil/", { // +id es lo que está en el routes línea 108, pero con otra nomenclatura
 			  method: "GET",
 			  headers: {
 				  "Content-Type": "application/json",
+				  Authorization: "Bearer " + localStorage.getItem("token"),
 				},
   
 			});
 			const data = await resp.json();
 			console.log (data)
-/* 			setStore({ preguntas_entrevistado: data.Preguntas }); // "preguntas": esto tiene que ser igual a lo que hay entre comillas del Jsonify de la 111 del routes
- */			// don't forget to return something, that is how the async resolves
+			setStore({ preguntas_perfil: data.Preguntas }); // "preguntas": esto tiene que ser igual a lo que hay entre comillas del Jsonify de la 111 del routes
+		// don't forget to return something, that is how the async resolves
 		  } catch (error) {
 			console.log("Error loading message from backend", error);
 		  }

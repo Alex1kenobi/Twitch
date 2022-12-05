@@ -7,8 +7,8 @@ export const Card2 = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
     actions.getEntrevistados();
-    actions.getPreguntasPerfil();
-
+    
+    
   }, []);
 
   return (

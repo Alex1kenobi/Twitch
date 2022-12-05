@@ -27,15 +27,17 @@ export const QuestionTable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {store.preguntas_perfil ? store.preguntas_perfil.map((cadapregunta) => {
-                      return (
-                        <tr>
-                          <td>{cadapregunta.interviewer}</td>
-                          <td>{cadapregunta.category}</td>
-                          <td>{cadapregunta.text}</td>
-                        </tr>
-                      );
-                    }): null}
+                    {store.preguntas_current_user.length > 0
+                      ? store.preguntas_current_user.map((cadapregunta) => {
+                          return (
+                            <tr>
+                              <td>{cadapregunta.interviewer}</td>
+                              <td>{cadapregunta.category}</td>
+                              <td>{cadapregunta.text}</td>
+                            </tr>
+                          );
+                        })
+                      : null}
                   </tbody>
                 </table>
               </div>

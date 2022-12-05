@@ -5,20 +5,17 @@ import "../../styles/profile-dashboard.css";
 import "../../styles/profile.css";
 import { QuestionTable } from "../component/question-table";
 
-
 /* 
 import { MdLocationPin, MdEmail } from "react-icons/md"; */
 
 export const UserProfile = () => {
   const { actions, store } = useContext(Context);
-  /* const [info, setInfo] = useState({
-    email: store.currentuser.email,
-    password: "",
-    confirmPassword: "",
-    name: store.currentuser.name,
-  }); */
+
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
+
+  const [ user, setUser ] = useState({});
+  const [ error, setError] = useState ("");
 
   const handleChange = (e) => {
     setInfo({
@@ -27,14 +24,31 @@ export const UserProfile = () => {
     });
   };
 
-  useEffect(() => {
-    actions.getPreguntasPerfil();
+  const [password2, setPassword2] = useState("");
 
-  }, []);
+  const verificarPasswords = (user) => {
+    
+    // Verificamos si las constraseñas no coinciden
+    if (user.password || password2) {
+      console.log(user);
+      if (user.password != password2) {
+        // Si las constraseñas no coinciden mostramos un mensaje
+        setError("La contraseña no coincide");
+      } else {
+        actions.editUser(user);
+      }
+    }
+    else {actions.editUser(user)
+    
+      swal({
+        icon: "success",
+        text: store.message,
+      });
+    
+    }
+  };
 
-  
   return (
-   
     <section>
       <div class="container">
         <div class="box">
@@ -43,8 +57,8 @@ export const UserProfile = () => {
           <div class="row mx-0 mt-2">
             <div class="col-md-4 p-0 border-end">
               <div class="viewbox">
-                <p class="blue">18</p>
                 <p>Preguntas que has hecho</p>
+                <p class="blue">{store.preguntas_current_user.length}</p>
               </div>
             </div>
             <div class="col-md-4 p-0 border-end">
@@ -77,11 +91,12 @@ export const UserProfile = () => {
                               src="https://i.imgur.com/0eg0aG0.jpg"
                               width="90"
                             />
-                            <span class="font-weight-bold">John Doe</span>
-                            <span class="text-black-50">
-                              john_doe12@bbb.com
+                            <span class="font-weight-bold">
+                              {store.user.username}
                             </span>
-                            <span>United States</span>
+                            <span class="text-black-50">
+                              {store.user.email}
+                            </span>
                           </div>
                         </div>
                         <div class="col-md-8">
@@ -94,7 +109,14 @@ export const UserProfile = () => {
                                 <input
                                   type="text"
                                   class="form-control"
-                                  placeholder="first name"
+                                  placeholder="Nombre de usuario"
+                                  defaultValue={store.user.username}
+                                  onChange={(e) => 
+                                    setUser({
+                                      ...user,
+                                      username: e.target.value
+                                    })
+                                  }
                                 />
                               </div>
                             </div>
@@ -103,23 +125,49 @@ export const UserProfile = () => {
                                 <input
                                   type="text"
                                   class="form-control"
+                                  defaultValue={store.user.email}
                                   placeholder="Email"
+                                  onChange={(e) => 
+                                    setUser({ ...user, email: e.target.value })
+                                  }
                                 />
                               </div>
                             </div>
                             <div class="row mt-3">
                               <div class="col-md-6">
                                 <input
-                                  type="text"
+                                  type="password"
                                   class="form-control"
-                                  placeholder="address"
+                                  placeholder="Cambia contraseña"
+                                  onChange={(e) => 
+                                    setUser({
+                                      ...user,
+                                      password: e.target.value
+                                    })
+                                  }
                                 />
                               </div>
                             </div>
+                            <div class="row mt-3">
+                              <div class="col-md-6">
+                                <input
+                                  type="password"
+                                  class="form-control"
+                                  onChange={(e) => setPassword2(e.target.value)}
+                                  placeholder="Confirmar Contraseña"
+                                />
+                              </div>
+                            </div>
+                            <p>
+                              { error }
+                            </p>
                             <div class="mt-5 text-right">
                               <button
                                 class="btn btn-primary profile-button"
                                 type="button"
+                                onClick={() => {
+                                  verificarPasswords(user);
+                                }}
                               >
                                 Guardar cambios
                               </button>

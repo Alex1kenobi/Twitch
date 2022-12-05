@@ -102,13 +102,27 @@ def getcategory():
     categories = Category.query.all()
     return jsonify ({"Categories": list(map(lambda x:x.serialize(), categories))}), 200
 
-@api.route('/preguntas/perfil/', methods=['GET'])
+
+@api.route('/edituser', methods=['PUT'])
 @jwt_required()
-def getPreguntasPerfil(): 
+def editprofile():
     user_id = get_jwt_identity ()
-    pregunta = Question.query.filter_by(user_id=user_id).first()
-    if pregunta:
-        print ("@@@@@@@@", pregunta)
-        return jsonify ({"Preguntas": pregunta.serialize()}), 200
+    user = User.query.get (user_id) #Esto trae el usuario que está logueado
+    if user: 
+        body_username = request.json.get("username") #lo que pilla el valor del input del username
+        if body_username == "" or body_username == None:
+            body_username = user.username
+        body_email = request.json.get("email")
+        if body_email == "" or body_email == None:
+            body_email = user.email
+        body_password = request.json.get("password")
+        if body_password == "" or body_password == None:
+            body_password = user.password
+
+        user.username = body_username
+        user.email = body_email
+        user.password = body_password
+        db.session.commit() #esto es para subirlo a la base de datos
+        return jsonify ({"message":"Cambios guardados", "user": user.serialize()}), 200
     else:
-        return jsonify ({"Message": "No hay preguntas"})
+        return jsonify({"message": "Inicie sesión"}), 400

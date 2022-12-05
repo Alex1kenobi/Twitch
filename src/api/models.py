@@ -25,6 +25,7 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=True, nullable=False)
     rol_id = db.Column(db.Integer, db.ForeignKey('rol.id'), nullable=False)
     question = db.relationship('Question', backref='user', lazy=True)
+
     
     
     def __repr__(self):
@@ -36,6 +37,7 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "rol": self.rol_id,
+            "questions": list(map(lambda x:x.serialize(), self.question)),
    }
 
 class Rol(db.Model):

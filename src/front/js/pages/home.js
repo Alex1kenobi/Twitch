@@ -10,7 +10,7 @@ import heroImg from '../../img/home/interview-set.jpg';
 export const Home = () => {
     return (
       <div>
-        <section className="heroSection">
+        <section className="heroSection" style={{backgroundImage: `url(${heroImg})` }}>
           <div className="overlay">
             <h1>Title goes here</h1>
             <p>Slogan or more info goes here</p>

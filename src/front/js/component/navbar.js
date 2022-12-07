@@ -6,18 +6,27 @@ import "../../styles/navbar.css";
 import Logo from "../../img/a1k-entero.png";
 
 export const Navbar = () => {
-  /*  const { useRef, useEffect, createRef } = React; */
-
   const { store, actions } = useContext(Context);
 
+  const [navBg, setNavBg] = useState(false)
+
+  const changenavBg = () => {
+    if(window.scrollY>=90){
+      setNavBg(true);
+    } else {
+      setNavBg(false);
+    }
+  }
+
+  window.addEventListener('scroll', changenavBg)
   return (
-    <nav className="navbar navbar-expand-lg">
+    <nav className={navBg ? "navbar navbar-expand-lg sticky-top  navbar-background" : "navbar navbar-expand-lg sticky-top"}>
       <div className="container-fluid">
         <Link to="/" className="navbarLogo">
           <img src={Logo} alt="Alex1Kenobi Logo" height={"50px"}></img>
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -25,9 +34,9 @@ export const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"><i class="bi bi-list burguerMenu"></i></span>
+          <span className="navbar-toggler-icon"><i className="bi bi-list burguerMenu"></i></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex justify-content-around ms-5">
             <li className="nav-item mx-2">
               <Link to="/" className="nav-link active" aria-current="page">

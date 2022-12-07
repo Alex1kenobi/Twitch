@@ -1,6 +1,10 @@
 .container-fluid {
   margin: 0vw 10vw;
 }
+.navbar-background {
+  background-color: rgb(16,10,31);
+  width: 100vw;
+}
 .nav-link{
   text-decoration: none;
   color: white;

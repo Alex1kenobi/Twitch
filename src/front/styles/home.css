@@ -1,3 +1,12 @@
+.heroSection {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url(../img/home/interview-set.jpg);
+}
+
 .homeSection {
     background-color: rgba(16,10,31,0.7);
     border: 1px;

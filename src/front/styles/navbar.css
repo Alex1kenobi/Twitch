@@ -1,8 +1,9 @@
 .container-fluid {
-  margin: 0vw 10vw;
+  margin: 0vh 15vw;
   padding: 0%;
 }
-.navbar{
+.navBar-top{
+  margin: 1.5vh 0vw;
   position: absolute;
   padding: 0%;
 }

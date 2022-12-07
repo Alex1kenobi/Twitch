@@ -11,7 +11,7 @@ export const Navbar = () => {
   const [navBg, setNavBg] = useState(false)
 
   const changenavBg = () => {
-    if(window.scrollY>=90){
+    if(window.scrollY>=50){
       setNavBg(true);
     } else {
       setNavBg(false);
@@ -20,10 +20,10 @@ export const Navbar = () => {
 
   window.addEventListener('scroll', changenavBg)
   return (
-    <nav className={navBg ? "navbar navbar-expand-lg sticky-top  navbar-background" : "navbar navbar-expand-lg sticky-top"}>
+    <nav className={navBg ? "navbar navbar-expand-lg sticky-top  navbar-background" : "navbar navbar-expand-lg sticky-top navBar-top"}>
       <div className="container-fluid">
         <Link to="/" className="navbarLogo">
-          <img src={Logo} alt="Alex1Kenobi Logo" height={"50px"}></img>
+          <img src={Logo} alt="Alex1Kenobi Logo" height={"50px"} className="mt-0"></img>
         </Link>
         <button
           className="navbar-toggler"

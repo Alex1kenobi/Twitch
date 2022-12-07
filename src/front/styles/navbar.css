@@ -1,16 +1,24 @@
 .container-fluid {
-  margin: 20px auto;
+  margin: 0vw 10vw;
 }
-.navbar-toggler-icon {
+.nav-link{
+  text-decoration: none;
   color: white;
+  position: relative;
+  transition: 1s 20000s ;
 }
-.nav-link {
-  font-size: 1.1rem;
+.nav-link:hover{
+  text-decoration: none;
+  color: white;
+  top: -3px;
+  transition:0s 0s;
+}
+a:active{
   text-decoration: none;
   color: white;
 }
 
-.nav-link:active{
+.burguerMenu{
   color: white;
-  font-weight: bolder;
+  font-size: 1.5rem;
 }

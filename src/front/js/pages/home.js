@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import {Card} from "../component/card"
 import {Card2} from "../component/card2"
-
+import "../../styles/webBackground.css"
 import heroImg from '../../img/slider_img_bg.png';
 
 
@@ -12,7 +12,7 @@ export const Home = () => {
         <div className="">
 <section className="py-5">
   <div className="container">
-    <div className="row">
+    <div className="homeSection">
       <div className="col-md-6 mt-4 mt-md-0 order-2 order-md-1">
         <img className="img-fluid" src="placeholder/pictures/bg_4-3.svg?primary=007bff" alt=""/>
       </div>
@@ -43,7 +43,7 @@ export const Home = () => {
 <section className="pt-5">
   <div className="container text-center">
     <h2 className="mb-3">PiperNet Setup</h2>
-    <div className="row">
+    <div className="homeSection">
       <div className="col-md-4 p-4">
         <span className="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">1</span>
         <h3>Move Data</h3>
@@ -66,7 +66,7 @@ export const Home = () => {
 
 <section className="py-5">
   <div className="container text-center">
-    <div className="row">
+    <div className="homeSection">
       <div className="col-md-10 mx-auto">
         <h1 className="mb-4">Bringing the Internet of the Future to the People</h1>
         <p className="lead">Decentralized, secure, private. The PiperNet is on it's way to revolutionize every smartphone, PC, and smart-fridge near you.</p>
@@ -74,7 +74,7 @@ export const Home = () => {
       </div>
     </div>
 
-    <div className="row">
+    <div className="homeSection">
       <div className="col-md-6 col-lg-3 p-4">
         <img src="placeholder/icons/check.svg" alt=""/>
         <h4 className="my-3">Security</h4>
@@ -98,7 +98,6 @@ export const Home = () => {
     </div>
   </div>
 </section>
-
         <Card2/>
         </div>
 

@@ -180,6 +180,34 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+     
+      deletequestion: async (id, interviewer_id) => {
+          try {
+          console.log("allaaaaaaa")
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/deletequestion",{
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify({id:id}),
+          });
+          const data = await resp.json();
+          console.log("volandoooooo")
+
+getActions().getEntrevistado(interviewer_id)
+          setStore({
+            message: data.message,
+           
+          });
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
       editUser: async (user) => {
         try {
           // fetching data from the backend

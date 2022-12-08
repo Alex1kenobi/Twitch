@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/profile-dashboard.css";
 import "../../styles/profile.css";
 import { QuestionTable } from "../component/question-table";
+import swal from 'sweetalert'
 
 /* 
 import { MdLocationPin, MdEmail } from "react-icons/md"; */
@@ -14,8 +15,8 @@ export const UserProfile = () => {
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
 
-  const [ user, setUser ] = useState({});
-  const [ error, setError] = useState ("");
+  const [user, setUser] = useState({});
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setInfo({
@@ -26,25 +27,35 @@ export const UserProfile = () => {
 
   const [password2, setPassword2] = useState("");
 
-  const verificarPasswords = (user) => {
-    
+  const verificarPasswords = async (user) => {
     // Verificamos si las constraseñas no coinciden
     if (user.password || password2) {
-      console.log(user);
+      
       if (user.password != password2) {
+        
         // Si las constraseñas no coinciden mostramos un mensaje
         setError("La contraseña no coincide");
       } else {
-        actions.editUser(user);
+        await actions.editUser(user);
+        
+        if (store.message == "Cambios guardados") {
+         
+          swal({
+            icon: "success",
+            text: store.message,
+          });
+        }
       }
-    }
-    else {actions.editUser(user)
-    
-      swal({
-        icon: "success",
-        text: store.message,
-      });
-    
+    } else {
+      await actions.editUser(user);
+      if (store.message == "Cambios guardados") {
+        
+        swal({
+          icon: "success",
+          text: store.message,
+        });
+      }
+      
     }
   };
 
@@ -111,10 +122,10 @@ export const UserProfile = () => {
                                   class="form-control"
                                   placeholder="Nombre de usuario"
                                   defaultValue={store.user.username}
-                                  onChange={(e) => 
+                                  onChange={(e) =>
                                     setUser({
                                       ...user,
-                                      username: e.target.value
+                                      username: e.target.value,
                                     })
                                   }
                                 />
@@ -127,7 +138,7 @@ export const UserProfile = () => {
                                   class="form-control"
                                   defaultValue={store.user.email}
                                   placeholder="Email"
-                                  onChange={(e) => 
+                                  onChange={(e) =>
                                     setUser({ ...user, email: e.target.value })
                                   }
                                 />
@@ -139,10 +150,10 @@ export const UserProfile = () => {
                                   type="password"
                                   class="form-control"
                                   placeholder="Cambia contraseña"
-                                  onChange={(e) => 
+                                  onChange={(e) =>
                                     setUser({
                                       ...user,
-                                      password: e.target.value
+                                      password: e.target.value,
                                     })
                                   }
                                 />
@@ -158,9 +169,7 @@ export const UserProfile = () => {
                                 />
                               </div>
                             </div>
-                            <p>
-                              { error }
-                            </p>
+                            <p>{error}</p>
                             <div class="mt-5 text-right">
                               <button
                                 class="btn btn-primary profile-button"

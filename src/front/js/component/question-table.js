@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 
 export const QuestionTable = () => {
   const { store, actions } = useContext(Context);
-  console.log(store.preguntas_perfil);
+
 
   return (
     <div class="padding">

@@ -17,19 +17,13 @@ export const InterviewerProfile = () => {
   useEffect(() => {
     actions.getEntrevistado(id);
   }, []);
-  console.log(store.categories);
 
   const handleQuestion = async () => {
-    await actions.preguntas(
-      store.entrevistado.id,
-      text,
-      selectcategory
-    );
+    await actions.preguntas(store.entrevistado.id, text, selectcategory);
     setText("");
     setSelectcategory("");
     setMensaje(store.message_response);
-
-  }
+  };
 
   return (
     <div>
@@ -59,114 +53,122 @@ export const InterviewerProfile = () => {
                 </div>
 
                 <div classname="needs-validation">
-                  {store.logged ? ( <>
-                  <div for="validationCustom04" class="form-label">
-                    <select
-                      class="form-select"
-                      aria-label="Floating label select example"
-                      id="validationCustom04"
-                      required
-                      value={selectcategory}
-                      onChange={(e) => {
-                        setSelectcategory(e.target.value);
-                      }}
-                    >
-                      <option selected disabled value="">
-                        Selecciona una opción
-                      </option>
-                      {store.categories.map((category) => {
-                        return (
-                          <>
-                            <option value={category.id}>{category.name}</option>
-                          </>
-                        );
-                      })}
-                    </select>
-                    <label for="floatingSelect"></label>
-                  </div>
+                  {store.logged ? (
+                    <>
+                      <div for="validationCustom04" class="form-label">
+                        <select
+                          class="form-select"
+                          aria-label="Floating label select example"
+                          id="validationCustom04"
+                          required
+                          value={selectcategory}
+                          onChange={(e) => {
+                            setSelectcategory(e.target.value);
+                          }}
+                        >
+                          <option selected disabled value="">
+                            Selecciona una opción
+                          </option>
+                          {store.categories.map((category) => {
+                            return (
+                              <>
+                                <option value={category.id}>
+                                  {category.name}
+                                </option>
+                              </>
+                            );
+                          })}
+                        </select>
+                        <label for="floatingSelect"></label>
+                      </div>
 
-                  <div class="form-floating">
-                    <textarea
-                      class="form-control"
-                      placeholder="Leave a comment here"
-                      id="floatingTextarea2"
-                      style={{ height: "100px" }}
-                      value={text}
-                      onChange={(e) => {
-                        setText(e.target.value);
-                      }}
-                    ></textarea>
-                    <label for="floatingTextarea2">Pon aquí tu pregunta</label>
-                  </div>
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Leave a comment here"
+                          id="floatingTextarea2"
+                          style={{ height: "100px" }}
+                          value={text}
+                          onChange={(e) => {
+                            setText(e.target.value);
+                          }}
+                        ></textarea>
+                        <label for="floatingTextarea2">
+                          Pon aquí tu pregunta
+                        </label>
+                      </div>
 
-                  <p>{mensaje}</p>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    onClick={ async () => {
-                      handleQuestion()
-                    }}
-                  >
-                    Enviar
-                  </button>
-                  </>
-) : ( <>
+                      <p>{mensaje}</p>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        onClick={async () => {
+                          handleQuestion();
+                        }}
+                      >
+                        Enviar
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div for="validationCustom04" class="form-label">
+                        <select
+                          class="form-select"
+                          aria-label="Floating label select example"
+                          id="validationCustom04"
+                          required
+                          value={selectcategory}
+                          onChange={(e) => {
+                            setSelectcategory(e.target.value);
+                          }}
+                          disabled
+                        >
+                          <option selected disabled value="">
+                            Selecciona una opción
+                          </option>
+                          {store.categories.map((category) => {
+                            return (
+                              <>
+                                <option value={category.id}>
+                                  {category.name}
+                                </option>
+                              </>
+                            );
+                          })}
+                        </select>
+                        <label for="floatingSelect"></label>
+                      </div>
 
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Leave a comment here"
+                          id="floatingTextarea2"
+                          style={{ height: "100px" }}
+                          value={text}
+                          onChange={(e) => {
+                            setText(e.target.value);
+                          }}
+                          disabled
+                        ></textarea>
+                        <label for="floatingTextarea2">
+                          Inicia sesión para hacer una pregunta
+                        </label>
+                      </div>
 
-<div for="validationCustom04" class="form-label">
-                    <select
-                      class="form-select"
-                      aria-label="Floating label select example"
-                      id="validationCustom04"
-                      required
-                      value={selectcategory}
-                      onChange={(e) => {
-                        setSelectcategory(e.target.value);
-                      }}
-                    disabled>
-                      <option selected disabled value="">
-                        Selecciona una opción
-                      </option>
-                      {store.categories.map((category) => {
-                        return (
-                          <>
-                            <option value={category.id}>{category.name}</option>
-                          </>
-                        );
-                      })}
-                    </select>
-                    <label for="floatingSelect"></label>
-                  </div>
-
-                  <div class="form-floating">
-                    <textarea
-                      class="form-control"
-                      placeholder="Leave a comment here"
-                      id="floatingTextarea2"
-                      style={{ height: "100px" }}
-                      value={text}
-                      onChange={(e) => {
-                        setText(e.target.value);
-                      }}
-                      disabled
-                    ></textarea>
-                    <label for="floatingTextarea2">Inicia sesión para hacer una pregunta</label>
-                  </div>
-
-                  <p>{mensaje}</p>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    onClick={ async () => {
-                      handleQuestion()
-                    }}
-                    disabled>
-                    Enviar
-                  </button>
-
-</>
- 
-) }
+                      <p>{mensaje}</p>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        onClick={async () => {
+                          handleQuestion();
+                        }}
+                        disabled
+                      >
+                        Enviar
+                      </button>
+                    </>
+                  )}
                   <div>
                     {store.preguntas_entrevistado.length > 0 ? (
                       store.preguntas_entrevistado.map((indexPregunta) => {
@@ -197,16 +199,19 @@ export const InterviewerProfile = () => {
                                   >
                                     Dislike
                                   </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary fas fa-meh-rolling-eyes"
-                                  >
-                                    Pregunta troll
-                                  </button>
-
-                                  <a href="#" class="btn btn-primary">
-                                    Borrar Pregunta
-                                  </a>
+                                  {store.user.id == indexPregunta.user_id ? (
+                                    <button
+                                      class="btn btn-primary"
+                                      onClick={() => {
+                                        actions.deletequestion(
+                                          indexPregunta.id,
+                                          indexPregunta.interviewer_id
+                                        );
+                                      }}
+                                    >
+                                      Borrar Pregunta
+                                    </button>
+                                  ) : null}
                                 </div>
                               </div>
                             </div>

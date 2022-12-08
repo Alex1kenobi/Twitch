@@ -27,8 +27,7 @@ if (store.logged){
 
 
   const verificarPasswords = (user) => {
-    console.log(user);
-    // Verificamos si las constraseñas no coinciden
+      // Verificamos si las constraseñas no coinciden
     if (user.password != password2) {
       // Si las constraseñas no coinciden mostramos un mensaje
       setError("La contraseña no coincide");
@@ -56,7 +55,7 @@ if (store.logged){
 
         <div class="section">
           <div class="container">
-            <div class="row full-height justify-content-center">
+            <div class="row full-height justify-content-center login-body">
               <div class="col-12 text-center align-self-center py-5">
                 <div class="section pb-5 pt-5 pt-sm-2 text-center">
                   <h6 class="mb-0 pb-3">
@@ -69,7 +68,12 @@ if (store.logged){
                     id="reg-log"
                     name="reg-log"
                   />
-                  <label for="reg-log"></label>
+                  <label for="reg-log">
+                    
+            
+                    
+                    </label>
+                  
                   <div class="card-3d-wrap mx-auto">
                     <div class="card-3d-wrapper">
                       <div class="card-front">

@@ -84,6 +84,7 @@ class Question(db.Model):
             "interviewer_id": interviewer.id,
             "category": category.name,
             "user": user.username,
+            "user_id": user.id,
         }
 
 class Interviewer(db.Model):

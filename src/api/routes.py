@@ -126,3 +126,26 @@ def editprofile():
         return jsonify ({"message":"Cambios guardados", "user": user.serialize()}), 200
     else:
         return jsonify({"message": "Inicie sesión"}), 400
+
+
+@api.route('/deletequestion', methods=['DELETE'])
+@jwt_required()
+def deletequestion():
+  
+    user_id = get_jwt_identity ()
+    body_question_id = request.json.get("id")
+    
+    getquestion = Question.query.get(body_question_id)
+    
+    
+    if getquestion:
+
+        db.session.delete(getquestion)
+
+        db.session.commit() #esto es para subirlo a la base de datos
+        
+   
+    
+        return jsonify ({"message": "Pregunta eliminada"}), 200
+    else: 
+        return jsonify ({"message": "Pregunta no eliminada"}), 400

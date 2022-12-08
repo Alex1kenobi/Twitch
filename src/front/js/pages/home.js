@@ -79,7 +79,7 @@ export const Home = () => {
         <section className="py-5">
           <div className="container text-center">
             <div className="homeSection">
-              <div className="col-md-5 mx-auto">
+              <div className="col-md-5 mx-auto mt-3">
                 <img src={sobremi} className="imgSobremi"></img>
               </div>
               <div className="col-md-5 mx-auto">
@@ -130,7 +130,7 @@ export const Home = () => {
               <div className="col-md-5 mx-auto d-flex flex-column justify-content-center">
                 <h1 className="mb-4 mt-5">Quieres que te entrevistemos?</h1>
                 <h4>Si quieres <span className="preguntasTitle">compartir</span> algo con la comunidad, contáctanos y podemos agendar una entrevista</h4>
-                <button className="btn btn-primary mt-5" role="button">
+                <button className="btn btn-primary mt-5 mb-5" role="button">
                   Contáctanos
                 </button>
               </div>

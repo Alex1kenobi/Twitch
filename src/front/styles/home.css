@@ -117,3 +117,15 @@
   color: white;
   font-size: 2vw;
 }
+
+.imgSobremi{
+  height: 35vw;
+  border-radius: 25px;
+  margin: 1vh 0vw;
+}
+
+.contactUs{
+  border-radius: 25px;
+  width: 25vw;
+  margin: 2vh 0vw;
+}

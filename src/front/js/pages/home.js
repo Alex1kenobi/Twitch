@@ -26,28 +26,28 @@ export const Home = () => {
             <h2 className="mb-5">Así puedes hacer tus preguntas</h2>
             <div className="homeSection">
               <div className="col-md-4 p-4">
-                <span className="d-inline-block rounded-circle px-4 py-3 my-4">
-                  1
+                <span className="d-inline-block px-4 py-3 my-4">
+                <i class="fa-solid fa-user homeFirstSectionIcon"></i>
                 </span>
-                <h3>Crea tu perfil</h3>
+                <h3>Crea tu <span className="preguntasTitle">perfil</span></h3>
                 <p>
                   De esta manera puedes entrar a las entrevistas en vivo
                 </p>
               </div>
               <div className="col-md-4 p-4">
-                <span className="d-inline-block rounded-circle px-4 py-3 my-4">
-                  2
+                <span className="d-inline-block  px-4 py-3 my-4">
+                <i class="fa-solid fa-square-poll-horizontal homeFirstSectionIcon"></i>
                 </span>
-                <h3>Vota por preguntas</h3>
+                <h3><span className="preguntasTitle">Vota</span> por preguntas</h3>
                 <p>
                   Vota por las preguntas interesantes que hayan hecho otros usuarios. Las preguntas más votadas serán las que se harán en la entrevista
                 </p>
               </div>
               <div className="col-md-4 p-4">
-                <span className="d-inline-block rounded-circle px-4 py-3 my-4">
-                  3
+                <span className="d-inline-block px-4 py-3 my-4">
+                <i class="fa-solid fa-circle-question homeFirstSectionIcon"></i>
                 </span>
-                <h3>Haz tus propias preguntas</h3>
+                <h3>Haz tus <span className="preguntasTitle">propias</span> preguntas</h3>
                 <p>
                   Si nadie ha hecho la pregunta que estás pensando, no pierdas tiempo, hazla tú mismo y ponla a votación. No te quedes con la duda! 
                 </p>

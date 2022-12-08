@@ -12,45 +12,44 @@ export const Home = () => {
       <div>
         <section className="heroSection" style={{backgroundImage: `url(${heroImg})` }}>
           <div className="overlay">
-            <h1>Title goes here</h1>
-            <p>Slogan or more info goes here</p>
+            {/* <h1>Nosotros presentamos la entrevista</h1> */}
+            <h1 className="heroTitle">NOSOTROS PRESENTAMOS LA ENTREVISTA</h1>
+            <br></br>
+            <h1 className="heroTitle">TÚ HACES LAS <span className="preguntasTitle">PREGUNTAS</span></h1>
+            <p className="heroSubTitle">Vota por la pregunta que quieras escuchar o haz tus propias preguntas</p>
+            <button className="callToAction" role="button">Entrevista a tú manera</button>
           </div>
         </section>
 
         <section className="pt-5">
           <div className="container text-center">
-            <h2 className="mb-3">PiperNet Setup</h2>
+            <h2 className="mb-5">Así puedes hacer tus preguntas</h2>
             <div className="homeSection">
               <div className="col-md-4 p-4">
-                <span className="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">
+                <span className="d-inline-block rounded-circle px-4 py-3 my-4">
                   1
                 </span>
-                <h3>Move Data</h3>
+                <h3>Crea tu perfil</h3>
                 <p>
-                  Using our Piper Assistant application, you can move your data
-                  to be stored our decentralized network with simple drag &amp;
-                  drop.
+                  De esta manera puedes entrar a las entrevistas en vivo
                 </p>
               </div>
               <div className="col-md-4 p-4">
-                <span className="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">
+                <span className="d-inline-block rounded-circle px-4 py-3 my-4">
                   2
                 </span>
-                <h3>Integrate Software</h3>
+                <h3>Vota por preguntas</h3>
                 <p>
-                  We want to make sure that you can keep using the software that
-                  you use to manage your business.
+                  Vota por las preguntas interesantes que hayan hecho otros usuarios. Las preguntas más votadas serán las que se harán en la entrevista
                 </p>
               </div>
               <div className="col-md-4 p-4">
-                <span className="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">
+                <span className="d-inline-block rounded-circle px-4 py-3 my-4">
                   3
                 </span>
-                <h3>Ongoing Support</h3>
+                <h3>Haz tus propias preguntas</h3>
                 <p>
-                  As with all innovative technologies, sometimes unpredictable
-                  things will happen, and you can always count on our support to
-                  solve issues for you.
+                  Si nadie ha hecho la pregunta que estás pensando, no pierdas tiempo, hazla tú mismo y ponla a votación. No te quedes con la duda! 
                 </p>
               </div>
             </div>

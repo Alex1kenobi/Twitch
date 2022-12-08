@@ -11,7 +11,7 @@ export const Navbar = () => {
   const [navBg, setNavBg] = useState(false)
 
   const changenavBg = () => {
-    if(window.scrollY>=50){
+    if(window.scrollY>=40){
       setNavBg(true);
     } else {
       setNavBg(false);
@@ -38,34 +38,34 @@ export const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex justify-content-around ms-5">
-            <li className="nav-item mx-2">
+            <li className="nav-item mx-3">
               <Link to="/" className="nav-link active" aria-current="page">
                 Home
               </Link>
             </li>
-            <li className="nav-item mx-2">
+            <li className="nav-item mx-3">
               <Link to="/entrevistas" className="nav-link">
                 Entrevistas
               </Link>
             </li>
-            <li className="nav-item mx-2">
+            <li className="nav-item mx-3">
               <Link to="/#" className="nav-link">
                 Sobre mi
               </Link>
             </li>
-            <li className="nav-item mx-2">
+            <li className="nav-item mx-3">
               <Link to="/#" className="nav-link">
                 Contacto
               </Link>
             </li>
             {store.logged ? (
               <>
-                <li className="nav-item mx-2">
+                <li className="nav-item mx-3">
                   <Link to="/user-profile" className="nav-link">
                     Perfil
                   </Link>
                 </li>
-                <li className="nav-item mx-2">
+                <li className="nav-item mx-3">
                   <Link
                     to="/"
                     onClick={() => {

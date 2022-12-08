@@ -7,7 +7,7 @@ import {Card2} from "../component/card2"
 
 export const Interview = () => {
     return (
-        <div>
+        <div className="mt-5">
         <Card2/>
         </div>
 

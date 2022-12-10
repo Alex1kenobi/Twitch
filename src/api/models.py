@@ -4,16 +4,16 @@ db = SQLAlchemy()
 
 likes = db.Table('likes',
     db.Column('question_id', db.Integer, db.ForeignKey('question.id'), primary_key=True),
-    db.Column('interviewer_id', db.Integer, db.ForeignKey('interviewer.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
 )
 
 dislikes = db.Table('dislikes',
-    db.Column('interviewer_id', db.Integer, db.ForeignKey('interviewer.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('question_id', db.Integer, db.ForeignKey('question.id'), primary_key=True)
 )
 
 trolls = db.Table('trolls',
-    db.Column('interviewer_id', db.Integer, db.ForeignKey('interviewer.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('question_id', db.Integer, db.ForeignKey('question.id'), primary_key=True)
 )
 
@@ -37,7 +37,7 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "rol": self.rol_id,
-            "questions": list(map(lambda x:x.serialize(), self.question)),
+            #"questions": list(map(lambda x:x.serialize(), self.question)),
    }
 
 class Rol(db.Model):
@@ -60,9 +60,9 @@ class Rol(db.Model):
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(350), nullable=False)
-    likes = db.relationship('Interviewer', secondary=likes, lazy='subquery',)
-    dislikes = db.relationship('Interviewer', secondary=dislikes, lazy='subquery',)
-    trolls = db.relationship('Interviewer', secondary=trolls, lazy='subquery',)
+    likes = db.relationship('User', secondary=likes, lazy='subquery',)
+    dislikes = db.relationship('User', secondary=dislikes, lazy='subquery',)
+    trolls = db.relationship('User', secondary=trolls, lazy='subquery',)
     interviewer_id = db.Column(db.Integer, db.ForeignKey('interviewer.id'),nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'),nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=True)
@@ -77,9 +77,9 @@ class Question(db.Model):
         return {
             "id": self.id,
             "text": self.text,
-            "likes": self.likes,
-            "dislikes": self.dislikes,
-            "trolls": self.trolls,
+            "likes": list(map(lambda y:y.serialize(), self.likes)),
+            "dislikes": list(map(lambda y:y.serialize(), self.dislikes)),
+            "trolls": list(map(lambda y:y.serialize(), self.trolls)),
             "interviewer": interviewer.name,
             "interviewer_id": interviewer.id,
             "category": category.name,

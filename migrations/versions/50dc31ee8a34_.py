@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 80f46d2c24fa
+Revision ID: 50dc31ee8a34
 Revises: 
-Create Date: 2022-11-29 18:35:33.200868
+Create Date: 2022-12-09 17:55:52.559003
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '80f46d2c24fa'
+revision = '50dc31ee8a34'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -64,25 +64,25 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('dislikes',
-    sa.Column('interviewer_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('question_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['interviewer_id'], ['interviewer.id'], ),
     sa.ForeignKeyConstraint(['question_id'], ['question.id'], ),
-    sa.PrimaryKeyConstraint('interviewer_id', 'question_id')
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'question_id')
     )
     op.create_table('likes',
     sa.Column('question_id', sa.Integer(), nullable=False),
-    sa.Column('interviewer_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['interviewer_id'], ['interviewer.id'], ),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['question_id'], ['question.id'], ),
-    sa.PrimaryKeyConstraint('question_id', 'interviewer_id')
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('question_id', 'user_id')
     )
     op.create_table('trolls',
-    sa.Column('interviewer_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('question_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['interviewer_id'], ['interviewer.id'], ),
     sa.ForeignKeyConstraint(['question_id'], ['question.id'], ),
-    sa.PrimaryKeyConstraint('interviewer_id', 'question_id')
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'question_id')
     )
     # ### end Alembic commands ###
 

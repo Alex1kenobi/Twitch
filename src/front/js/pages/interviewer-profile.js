@@ -185,34 +185,57 @@ export const InterviewerProfile = () => {
                                     {indexPregunta.category}
                                   </p>
                                 </>
+{store.logged ? (
 
-                                <div class="input-group">
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary fas fa-thumbs-up"
-                                  >
-                                    Like
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary fas fa-thumbs-down"
-                                  >
-                                    Dislike
-                                  </button>
-                                  {store.user.id == indexPregunta.user_id ? (
-                                    <button
-                                      class="btn btn-primary"
-                                      onClick={() => {
-                                        actions.deletequestion(
-                                          indexPregunta.id,
-                                          indexPregunta.interviewer_id
-                                        );
-                                      }}
-                                    >
-                                      Borrar Pregunta
-                                    </button>
-                                  ) : null}
-                                </div>
+
+<div class="input-group">
+{}
+<button
+  type="button"
+  class="btn btn-primary fas fa-thumbs-up"
+  onClick={() => {
+    actions.Likes(
+      indexPregunta.id,
+      store.user.id,
+      indexPregunta.interviewer_id
+    );
+  }}
+>
+  Like
+</button>
+{indexPregunta.likes.length}
+
+<button
+  type="button"
+  class="btn btn-primary fas fa-thumbs-down"
+>
+  Dislike
+</button>
+
+<button
+  type="button"
+  class="btn btn-primary fas fa-thumbs-down"
+>
+  Troll / Repetido
+</button>
+
+{store.user.id == indexPregunta.user_id ? (
+  <button
+    class="btn btn-primary"
+    onClick={() => {
+      actions.deletequestion(
+        indexPregunta.id,
+        indexPregunta.interviewer_id
+      );
+    }}
+  >
+    Borrar Pregunta
+  </button>
+) : null}
+</div>
+
+): null}
+
                               </div>
                             </div>
                           </div>

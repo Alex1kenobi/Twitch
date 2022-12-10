@@ -93,7 +93,7 @@ def preguntas():
         question = Question (text=body_text, interviewer_id = body_interviewer_id, category_id = body_category_id, user_id = user_id)
         db.session.add(question)
         db.session.commit()
-        return jsonify ({"message":"Pregunta enviada", "question": question.serialize()})
+        return jsonify ({"message":"Pregunta enviada", "question": question.serialize()}), 200
     else:
         return jsonify({"message": "Campo obligatorio no rellenado"}), 400
 
@@ -149,3 +149,36 @@ def deletequestion():
         return jsonify ({"message": "Pregunta eliminada"}), 200
     else: 
         return jsonify ({"message": "Pregunta no eliminada"}), 400
+
+
+@api.route('/likes', methods=['POST'])
+@jwt_required()
+def likes():
+    user_id = request.json.get("user_id")
+    print ("@@@@@user_id", user_id)
+    body_question_id = request.json.get("id")   
+    print ("@@@@@body_question_id", body_question_id)
+    user = User.query.get (user_id)
+    print ("@@@@@user", user)
+    if body_question_id:
+        question = Question.query.get(body_question_id)
+        print ("@@@@@question", question)
+        if user not in question.likes:
+            question.likes.append (user)
+            db.session.commit()
+            return jsonify ({"Liked":True, "Dislike": False, "Troll": False}), 200
+        else:
+            question.likes = list(filter(lambda x:x.id != user.id, question.likes))
+            db.session.commit(),
+            return jsonify({"Liked": False, "Message": "ya le ha dado like"}), 400
+    else:
+        return jsonify({"Liked": False, "Message": "Falta ID de pregunta"}), 400
+
+
+@api.route('/getpreguntas', methods=['GET'])
+@jwt_required()
+def getpreguntas():
+    user_id = get_jwt_identity ()
+    preguntas = Question.query.filter_by(user_id = user_id).first()
+    print ("@@@@@@@@@@", preguntas)
+    return jsonify ({"Question": preguntas.serialize()}), 200

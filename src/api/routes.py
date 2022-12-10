@@ -175,6 +175,61 @@ def likes():
         return jsonify({"Liked": False, "Message": "Falta ID de pregunta"}), 400
 
 
+@api.route('/dislikes', methods=['POST'])
+@jwt_required()
+def dislike():
+    user_id = request.json.get("user_id")
+    print ("@@@@@user_id", user_id)
+    body_question_id = request.json.get("id")   
+    print ("@@@@@body_question_id", body_question_id)
+    user = User.query.get (user_id)
+    print ("@@@@@user", user)
+    if body_question_id:
+        question = Question.query.get(body_question_id)
+        print ("@@@@@question", question)
+        if user not in question.dislikes:
+            question.dislikes.append (user)
+            db.session.commit()
+            return jsonify ({"Liked":False, "Dislike": True, "Troll": False}), 200
+        else:
+            question.dislikes = list(filter(lambda x:x.id != user.id, question.dislikes))
+            db.session.commit(),
+            return jsonify({"Dislike": False, "Message": "ya le ha dado dislike"}), 400
+    else:
+        return jsonify({"Dislike": False, "Message": "Falta ID de pregunta"}), 400
+
+
+
+@api.route('/trolls', methods=['POST'])
+@jwt_required()
+def trolls():
+    user_id = request.json.get("user_id")
+    print ("@@@@@user_id", user_id)
+    body_question_id = request.json.get("id")   
+    print ("@@@@@body_question_id", body_question_id)
+    user = User.query.get (user_id)
+    print ("@@@@@user", user)
+    if body_question_id:
+        question = Question.query.get(body_question_id)
+        print ("@@@@@question", question)
+        if user not in question.trolls:
+            question.trolls.append (user)
+            db.session.commit()
+            return jsonify ({"Liked":False, "Dislike": False, "Troll": True}), 200
+        else:
+            question.trolls = list(filter(lambda x:x.id != user.id, question.trolls))
+            db.session.commit(),
+            return jsonify({"Troll": False, "Message": "ya le ha dado troll"}), 400
+    else:
+        return jsonify({"Troll": False, "Message": "Falta ID de pregunta"}), 400
+
+
+
+
+
+
+
+
 @api.route('/getpreguntas', methods=['GET'])
 @jwt_required()
 def getpreguntas():

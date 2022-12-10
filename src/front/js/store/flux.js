@@ -265,7 +265,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify({
               id:id,
               user_id : user_id,
-          
             }),
           });
           const data = await resp.json();
@@ -278,6 +277,68 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+
+      Dislikes: async (id, user_id, interviewer_id) => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/dislikes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+
+            body: JSON.stringify({
+              id:id,
+              user_id : user_id,
+            }),
+          });
+          const data = await resp.json();
+
+          await setStore({ Liked: data.Liked, Dislikes: data.Dislikes, Troll: data.Troll});
+          await getActions().getEntrevistado(interviewer_id);
+         
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
+      Trolls: async (id, user_id, interviewer_id) => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/trolls", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+
+            body: JSON.stringify({
+              id:id,
+              user_id : user_id,
+            }),
+          });
+          const data = await resp.json();
+
+          await setStore({ Liked: data.Liked, Dislikes: data.Dislikes, Troll: data.Troll});
+          await getActions().getEntrevistado(interviewer_id);
+         
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
+
+
+
+
+
+
 
 
 

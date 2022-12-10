@@ -185,57 +185,74 @@ export const InterviewerProfile = () => {
                                     {indexPregunta.category}
                                   </p>
                                 </>
-{store.logged ? (
+                                {store.logged ? (
+                                  <div class="input-group">
+                                    {}
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary fas fa-thumbs-up"
+                                      onClick={() => {
+                                        actions.Likes(
+                                          indexPregunta.id,
+                                          store.user.id,
+                                          indexPregunta.interviewer_id
+                                        );
+                                      }}
+                                    >
+                                      Like
+                                    </button>
+                                    {indexPregunta.likes.length}
+
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary fas fa-thumbs-down"
+                                      onClick={() => {
+                                        actions.Dislikes(
+                                          indexPregunta.id,
+                                          store.user.id,
+                                          indexPregunta.interviewer_id
+                                        );
+                                      }}
+                                    >
+                                      Dislike
+                                    </button>
+                                    {indexPregunta.dislikes.length}
+
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary fas fa-thumbs-down"
+                                      onClick={() => {
+                                        actions.Trolls(
+                                          indexPregunta.id,
+                                          store.user.id,
+                                          indexPregunta.interviewer_id
+                                        );
+                                      }}
+                                    >
+                                      Troll / Repetido
+                                    </button>
+                                    {indexPregunta.trolls.length}
+
+                                    
 
 
-<div class="input-group">
-{}
-<button
-  type="button"
-  class="btn btn-primary fas fa-thumbs-up"
-  onClick={() => {
-    actions.Likes(
-      indexPregunta.id,
-      store.user.id,
-      indexPregunta.interviewer_id
-    );
-  }}
->
-  Like
-</button>
-{indexPregunta.likes.length}
 
-<button
-  type="button"
-  class="btn btn-primary fas fa-thumbs-down"
->
-  Dislike
-</button>
 
-<button
-  type="button"
-  class="btn btn-primary fas fa-thumbs-down"
->
-  Troll / Repetido
-</button>
-
-{store.user.id == indexPregunta.user_id ? (
-  <button
-    class="btn btn-primary"
-    onClick={() => {
-      actions.deletequestion(
-        indexPregunta.id,
-        indexPregunta.interviewer_id
-      );
-    }}
-  >
-    Borrar Pregunta
-  </button>
-) : null}
-</div>
-
-): null}
-
+                                    {store.user.id == indexPregunta.user_id ? (
+                                      <button
+                                        class="btn btn-primary"
+                                        onClick={() => {
+                                          actions.deletequestion(
+                                            indexPregunta.id,
+                                            indexPregunta.interviewer_id
+                                          );
+                                        }}
+                                      >
+                                        Borrar Pregunta
+                                      </button>
+                                    ) : null}
+                                  </div>
+                                ) : null}
                               </div>
                             </div>
                           </div>

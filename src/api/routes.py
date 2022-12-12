@@ -224,12 +224,6 @@ def trolls():
         return jsonify({"Troll": False, "Message": "Falta ID de pregunta"}), 400
 
 
-
-
-
-
-
-
 @api.route('/getpreguntas', methods=['GET'])
 @jwt_required()
 def getpreguntas():

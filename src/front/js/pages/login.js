@@ -4,37 +4,36 @@ import { Context } from "../store/appContext";
 
 import { useNavigate } from "react-router-dom";
 
+import { LoginTwitch } from "../component/loginTwitch";
+
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState("");
   const [user, setUser] = useState({});
   const [password2, setPassword2] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const loginNavigate = async (user) => {
-     try {
-     await actions.login(user);
-if (store.logged){
-      navigate("/entrevistas")}
-      else {
-        setError (store.message); 
+    try {
+      await actions.login(user);
+      if (store.logged) {
+        navigate("/entrevistas");
+      } else {
+        setError(store.message);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
-
   const verificarPasswords = (user) => {
-      // Verificamos si las constraseñas no coinciden
+    // Verificamos si las constraseñas no coinciden
     if (user.password != password2) {
       // Si las constraseñas no coinciden mostramos un mensaje
       setError("La contraseña no coincide");
     } else {
       actions.register(user);
-      if (localStorage.getItem("token")){
-        navigate("/entrevistas")
+      if (localStorage.getItem("token")) {
+        navigate("/entrevistas");
       }
     }
   };
@@ -68,12 +67,8 @@ if (store.logged){
                     id="reg-log"
                     name="reg-log"
                   />
-                  <label for="reg-log">
-                    
-            
-                    
-                    </label>
-                  
+                  <label for="reg-log"></label>
+
                   <div class="card-3d-wrap mx-auto">
                     <div class="card-3d-wrapper">
                       <div class="card-front">
@@ -115,7 +110,7 @@ if (store.logged){
                             <button
                               class="btn mt-4"
                               onClick={() => {
-                                loginNavigate(user)
+                                loginNavigate(user);
                               }}
                             >
                               Enviar
@@ -128,6 +123,7 @@ if (store.logged){
                           </div>
                         </div>
                       </div>
+                      
                       <div class="card-back">
                         <div class="center-wrap">
                           <div class="section text-center">
@@ -137,7 +133,8 @@ if (store.logged){
                                 type="text"
                                 onChange={(e) => {
                                   setUser({
-                                    ...user, rol_id:2, // Esto del rol_id le pone rol "2" (usuario) a todo cristo
+                                    ...user,
+                                    rol_id: 2, // Esto del rol_id le pone rol "2" (usuario) a todo cristo
                                     username: e.target.value,
                                   });
                                 }}
@@ -189,8 +186,6 @@ if (store.logged){
                               />
                               <i class="input-icon fas fa-key"></i>
                             </div>
-
-                           
 
                             <p>{error}</p>
                             <button

@@ -26,8 +26,6 @@ class User(db.Model):
     rol_id = db.Column(db.Integer, db.ForeignKey('rol.id'), nullable=False)
     question = db.relationship('Question', backref='user', lazy=True)
 
-    
-    
     def __repr__(self):
         return f'<User {self.email}>'
 

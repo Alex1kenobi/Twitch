@@ -12,6 +12,54 @@ export const InterviewerProfile = () => {
   const [selectcategory, setSelectcategory] = useState("");
   const [mensaje, setMensaje] = useState("");
 
+
+
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    // 👇️ toggle
+    setIsActive(current => !current);
+  };
+
+
+
+/*   Esto es para ponerlo en línea con el estilo
+const btnStyle = {
+    border: "5px solid pink",
+    background: "red",
+  };
+   */
+
+
+
+/* Este para intentarlo con los uste state
+
+const [disabledLike, setDisabledLike] = useState(false);
+  const [disabledDislike, setDisabledDislike] = useState(false);
+  const [disabledTroll, setDisabledTroll] = useState(false); */
+
+/* 
+  function handleClickLike() {
+    setDisabledLike(true);
+    setDisabledDislike(false)
+    setDisabledTroll(false);
+  }
+
+  function handleClickDislike() {
+    setDisabledLike(false);
+    setDisabledDislike(true)
+    setDisabledTroll(false);
+  }
+
+  function handleClickTroll() {
+    setDisabledLike(false);
+    setDisabledDislike(false)
+    setDisabledTroll(true);
+  }
+ */
+
+
+
   let { id } = useParams();
 
   useEffect(() => {
@@ -23,6 +71,7 @@ export const InterviewerProfile = () => {
     setText("");
     setSelectcategory("");
     setMensaje(store.message_response);
+
   };
 
   return (
@@ -100,6 +149,7 @@ export const InterviewerProfile = () => {
 
                       <p>{mensaje}</p>
                       <button
+                      
                         type="submit"
                         class="btn btn-primary"
                         onClick={async () => {
@@ -190,6 +240,10 @@ export const InterviewerProfile = () => {
                                     {}
                                     <button
                                       type="button"
+                                      style={{
+                                        backgroundColor: isActive ? 'salmon' : '',
+                                        color: isActive ? 'white' : '',
+                                      }}
                                       class="btn btn-primary fas fa-thumbs-up"
                                       onClick={() => {
                                         actions.Likes(
@@ -197,8 +251,12 @@ export const InterviewerProfile = () => {
                                           store.user.id,
                                           indexPregunta.interviewer_id
                                         );
+                                        handleClick() /* Este hace que cambie el color...... Pero de todos! */
+                                        /* handleClickLike(); */
+
                                       }}
-                                    >
+
+                                    /* disabled={disabledLike} */>
                                       Like
                                     </button>
                                     {indexPregunta.likes.length}
@@ -211,8 +269,10 @@ export const InterviewerProfile = () => {
                                           indexPregunta.id,
                                           store.user.id,
                                           indexPregunta.interviewer_id
-                                        );
+                                        );/* handleClickDislike(likes); */
                                       }}
+                                    /* disabled={disabledDislike} */
+                                    
                                     >
                                       Dislike
                                     </button>
@@ -226,17 +286,12 @@ export const InterviewerProfile = () => {
                                           indexPregunta.id,
                                           store.user.id,
                                           indexPregunta.interviewer_id
-                                        );
+                                        );/* handleClickTroll(); */
                                       }}
-                                    >
+                                    /* disabled={disabledTroll} */>
                                       Troll / Repetido
                                     </button>
                                     {indexPregunta.trolls.length}
-
-                                    
-
-
-
 
                                     {store.user.id == indexPregunta.user_id ? (
                                       <button

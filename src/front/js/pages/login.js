@@ -46,51 +46,51 @@ if (store.logged){
         <div id="msg"></div>
 
         {/* <!-- Mensajes de Verificación --> */}
-        <div id="error" class="alert alert-danger ocultar" role="alert">
+        <div id="error" className="alert alert-danger ocultar" role="alert">
           Las Contraseñas no coinciden, vuelve a intentar !
         </div>
-        <div id="ok" class="alert alert-success ocultar" role="alert">
+        <div id="ok" className="alert alert-success ocultar" role="alert">
           Las Contraseñas coinciden ! (Procesando formulario ... )
         </div>
         {/* <!-- Fin Mensajes de Verificación --> */}
 
-        <div class="section">
-          <div class="container">
-            <div class="row full-height justify-content-center login-body">
-              <div class="col-12 text-center align-self-center py-5">
-                <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                  <h6 class="mb-0 pb-3">
+        <div className="section">
+          <div className="container">
+            <div className="row full-height justify-content-center login-body">
+              <div className="col-12 text-center align-self-center py-5">
+                <div className="section pb-5 pt-5 pt-sm-2 text-center">
+                  <h6 className="mb-0 pb-3">
                     <span>Entrar </span>
                     <span>Registro</span>
                   </h6>
                   <input
-                    class="checkbox"
+                    className="checkbox"
                     type="checkbox"
                     id="reg-log"
                     name="reg-log"
                   />
-                  <label for="reg-log"></label>
-                  <div class="card-3d-wrap mx-auto">
-                    <div class="card-3d-wrapper">
-                      <div class="card-front">
-                        <div class="center-wrap">
-                          <div class="section text-center">
-                            <h4 class="mb-4 pb-3">Entrar</h4>
-                            <div class="form-group">
+                  <label htmlFor="reg-log"></label>
+                  <div className="card-3d-wrap mx-auto">
+                    <div className="card-3d-wrapper">
+                      <div className="card-front">
+                        <div className="center-wrap">
+                          <div className="section text-center">
+                            <h4 className="mb-4 pb-3">Entrar</h4>
+                            <div className="form-group">
                               <input
                                 type="email"
                                 onChange={(e) => {
                                   setUser({ ...user, email: e.target.value });
                                 }}
                                 name="logemail"
-                                class="form-style"
+                                className="form-style"
                                 placeholder="Tu email"
                                 id="logemail"
-                                autocomplete="off"
+                                autoComplete="off"
                               />
-                              <i class="input-icon fas fa-envelope"></i>
+                              <i className="input-icon fas fa-envelope"></i>
                             </div>
-                            <div class="form-group mt-2">
+                            <div className="form-group mt-2">
                               <input
                                 type="password"
                                 onChange={(e) => {
@@ -100,35 +100,35 @@ if (store.logged){
                                   });
                                 }}
                                 name="logpass"
-                                class="form-style"
+                                className="form-style"
                                 placeholder="Tu contraseña"
                                 id="logpass"
-                                autocomplete="off"
+                                autoComplete="off"
                               />
-                              <i class="input-icon fas fa-key"></i>
+                              <i className="input-icon fas fa-key"></i>
                             </div>
                             <p>{error}</p>
                             <button
-                              class="btn mt-4"
+                              className="btn mt-4"
                               onClick={() => {
                                 loginNavigate(user)
                               }}
                             >
                               Enviar
                             </button>
-                            <p class="mb-0 mt-4 text-center">
-                              <a href="#0" class="link">
+                            <p className="mb-0 mt-4 text-center">
+                              <a href="#0" className="link">
                                 ¿Olvidaste la contraseña?
                               </a>
                             </p>
                           </div>
                         </div>
                       </div>
-                      <div class="card-back">
-                        <div class="center-wrap">
-                          <div class="section text-center">
-                            <h4 class="mb-4 pb-3">Registro</h4>
-                            <div class="form-group">
+                      <div className="card-back">
+                        <div className="center-wrap">
+                          <div className="section text-center">
+                            <h4 className="mb-4 pb-3">Registro</h4>
+                            <div className="form-group">
                               <input
                                 type="text"
                                 onChange={(e) => {
@@ -138,52 +138,52 @@ if (store.logged){
                                   });
                                 }}
                                 name="logname"
-                                class="form-style"
+                                className="form-style"
                                 placeholder="Nombre de usuario"
                                 id="logname"
-                                autocomplete="off"
+                                autoComplete="off"
                               />
-                              <i class="input-icon fas fa-user"></i>
+                              <i className="input-icon fas fa-user"></i>
                             </div>
-                            <div class="form-group mt-2">
+                            <div className="form-group mt-2">
                               <input
                                 type="email"
                                 onChange={(e) => {
                                   setUser({ ...user, email: e.target.value });
                                 }}
                                 name="logemail"
-                                class="form-style"
+                                className="form-style"
                                 placeholder="Tu email"
                                 id="logemail"
-                                autocomplete="off"
+                                autoComplete="off"
                               />
-                              <i class="input-icon fas fa-envelope"></i>
+                              <i className="input-icon fas fa-envelope"></i>
                             </div>
-                            <div class="form-group mt-2">
+                            <div className="form-group mt-2">
                               <input
                                 type="password"
                                 name="pass1"
-                                class="form-style"
+                                className="form-style"
                                 placeholder="Tu contraseña"
                                 id="pass1"
-                                autocomplete="off"
+                                autoComplete="off"
                                 onChange={(e) =>
                                   setUser({ ...user, password: e.target.value })
                                 }
                               />
-                              <i class="input-icon fas fa-key"></i>
+                              <i className="input-icon fas fa-key"></i>
                             </div>
-                            <div class="form-group mt-2">
+                            <div className="form-group mt-2">
                               <input
                                 type="password"
                                 name="pass2"
-                                class="form-style"
+                                className="form-style"
                                 placeholder="Repite tu contraseña"
                                 id="pass2"
-                                autocomplete="off"
+                                autoComplete="off"
                                 onChange={(e) => setPassword2(e.target.value)}
                               />
-                              <i class="input-icon fas fa-key"></i>
+                              <i className="input-icon fas fa-key"></i>
                             </div>
 
                            
@@ -193,7 +193,7 @@ if (store.logged){
                               href="#"
                               type="submit"
                               id="login"
-                              class="btn mt-4"
+                              className="btn mt-4"
                               onClick={() => {
                                 verificarPasswords(user);
                               }}

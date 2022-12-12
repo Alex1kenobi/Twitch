@@ -48,7 +48,7 @@ export const Home = () => {
               </div>
               <div className="col-md-4 p-4">
                 <span className="d-inline-block  px-4 py-3 my-4">
-                  <i class="fa-solid fa-square-poll-horizontal homeFirstSectionIcon"></i>
+                  <i className="fa-solid fa-square-poll-horizontal homeFirstSectionIcon"></i>
                 </span>
                 <h3>
                   <span className="preguntasTitle">Vota</span> por preguntas
@@ -61,7 +61,7 @@ export const Home = () => {
               </div>
               <div className="col-md-4 p-4">
                 <span className="d-inline-block px-4 py-3 my-4">
-                  <i class="fa-solid fa-circle-question homeFirstSectionIcon"></i>
+                  <i className="fa-solid fa-circle-question homeFirstSectionIcon"></i>
                 </span>
                 <h3>
                   Haz tus <span className="preguntasTitle">propias</span> preguntas

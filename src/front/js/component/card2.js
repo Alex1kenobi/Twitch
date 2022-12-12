@@ -12,12 +12,12 @@ export const Card2 = () => {
   }, []);
 
   return (
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-sm-8 col-lg-6">
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-8 col-lg-6">
           {/* <!-- Section Heading--> */}
           <div
-            class="section_heading text-center wow fadeInUp"
+            className="section_heading text-center wow fadeInUp"
             data-wow-delay="0.2s"
             style={{
               visibility: "visible",
@@ -32,16 +32,16 @@ export const Card2 = () => {
               Appland is completely creative, lightweight, clean &amp; super
               responsive app landing page.
             </p>
-            <div class="line"></div>
+            <div className="line"></div>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div className="row">
         {store.entrevistados.map((invitado) => {
           return (
-            <div class="col-12 col-sm-6 col-lg-3">
+            <div className="col-12 col-sm-6 col-lg-3">
               <div
-                class="single_advisor_profile wow fadeInUp"
+                className="single_advisor_profile wow fadeInUp"
                 data-wow-delay="0.2s"
                 style={{
                   visibility: "visible",
@@ -50,29 +50,29 @@ export const Card2 = () => {
                 }}
               >
                 {/* <!-- Team Thumb--> */}
-                <div class="advisor_thumb">
+                <div className="advisor_thumb">
                   <img
                     src={invitado.photo}
                     alt=""
                   />
                   {/* <!-- Social Info--> */}
-                  <div class="social-info">
+                  <div className="social-info">
                     <a href="#">
-                      <i class="fa fa-facebook"></i>
+                      <i className="fa fa-facebook"></i>
                     </a>
                     <a href="#">
-                      <i class="fa fa-twitter"></i>
+                      <i className="fa fa-twitter"></i>
                     </a>
                     <a href="#">
-                      <i class="fa fa-linkedin"></i>
+                      <i className="fa fa-linkedin"></i>
                     </a>
                   </div>
                 </div>
                 {/*   <!-- Team Details--> */}
                 <Link to={"/entrevistas/"+invitado.id+"/"+invitado.name}>
-                <div class="single_advisor_details_info">
+                <div className="single_advisor_details_info">
                   <h6>{invitado.name}</h6>
-                  <p class="designation">{invitado.position}</p>
+                  <p className="designation">{invitado.position}</p>
                 </div>
                 </Link>
               </div>

@@ -3,105 +3,141 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import {Card} from "../component/card"
 import {Card2} from "../component/card2"
-
-import heroImg from '../../img/slider_img_bg.png';
+import "../../styles/webBackground.css"
+import heroImg from '../../img/home/interview-set.jpg';
+import sobremi from '../../img/home/sobremi.png';
+import superman from '../../img/home/superman2.png';
+import contactUs from '../../img/home/contactUs.jpg';
 
 
 export const Home = () => {
     return (
-        <div>
-<section class="py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 mt-4 mt-md-0 order-2 order-md-1">
-        <img class="img-fluid" src="placeholder/pictures/bg_4-3.svg?primary=007bff" alt=""/>
-      </div>
-      <div class="col-md-6 my-auto pl-md-5 order-1 order-md-2">
-        <h2 class="mb-4">The New Internet</h2>
-        <p class="mb-4">Our mission is not to outsell Hooli with a product like their latest Box 3. We are not in it for the money - we are in it to make the whole world decentralized.</p>
-        <div>
-          <div class="d-flex align-items-start">
-            <img class="mr-3" src="placeholder/icons/check.svg" alt=""/>
-            <div>
-              <h4>Security</h4>
-              <p>Your data is virtually unhackable compared to traditional net.</p>
+      <div>
+        <section
+          className="heroSection"
+          style={{ backgroundImage: `url(${heroImg})` }}
+        >
+          <div className="overlay">
+            <h1 className="heroTitle">NOSOTROS PRESENTAMOS LA ENTREVISTA</h1>
+            <br></br>
+            <h1 className="heroTitle">
+              TÚ HACES LAS <span className="preguntasTitle">PREGUNTAS</span>
+            </h1>
+            <p className="heroSubTitle">
+              Vota por la pregunta que quieras escuchar o haz tus propias
+              preguntas
+            </p>
+            <button className="callToAction" role="button">
+              Entrevista a tú manera
+            </button>
+          </div>
+        </section>
+
+        <section className="pt-5">
+          <div className="container text-center">
+            <h2 className="mb-5">Así puedes hacer tus preguntas</h2>
+            <div className="homeSection">
+              <div className="col-md-4 p-4">
+                <span className="d-inline-block px-4 py-3 my-4">
+                  <i class="fa-solid fa-user homeFirstSectionIcon"></i>
+                </span>
+                <h3>
+                  Crea tu <span className="preguntasTitle">perfil</span>
+                </h3>
+                <p>De esta manera puedes entrar a las entrevistas en vivo</p>
+              </div>
+              <div className="col-md-4 p-4">
+                <span className="d-inline-block  px-4 py-3 my-4">
+                  <i className="fa-solid fa-square-poll-horizontal homeFirstSectionIcon"></i>
+                </span>
+                <h3>
+                  <span className="preguntasTitle">Vota</span> por preguntas
+                </h3>
+                <p>
+                  Vota por las preguntas interesantes que hayan hecho otros
+                  usuarios. Las preguntas más votadas serán las que se harán en
+                  la entrevista
+                </p>
+              </div>
+              <div className="col-md-4 p-4">
+                <span className="d-inline-block px-4 py-3 my-4">
+                  <i className="fa-solid fa-circle-question homeFirstSectionIcon"></i>
+                </span>
+                <h3>
+                  Haz tus <span className="preguntasTitle">propias</span> preguntas
+                </h3>
+                <p>
+                  Si nadie ha hecho la pregunta que estás pensando, no pierdas
+                  tiempo, hazla tú mismo y ponla a votación. No te quedes con la
+                  duda!
+                </p>
+              </div>
             </div>
           </div>
-          <div class="d-flex align-items-start">
-            <img class="mr-3" src="placeholder/icons/check.svg" alt=""/>
-            <div>
-              <h4>Privacy</h4>
-              <p>Nobody is tracking you when your activity when you use PiperNet.</p>
+        </section>
+
+        <section className="py-5">
+          <div className="container text-center">
+            <div className="homeSection">
+              <div className="col-md-5 mx-auto mt-3">
+                <img src={sobremi} className="imgSobremi"></img>
+              </div>
+              <div className="col-md-5 mx-auto">
+                <h1 className="mb-4 mt-5">Sobre Mí</h1>
+                <h4 className="preguntasTitle">Consultor Empresarial y Digital</h4>
+                <p className="lead">
+                  Escucha la historia de mi vida de cómo el destino cambió mi
+                  movida, de cómo sin comerlo ni beberlo llegué a ser el
+                  pringado de un barrio llamado Bel Air. 
+                  <br></br>
+                  <br></br>
+                  Al oeste de un islote
+                  crecía y vivía sin hacer mucho caso a la policía. Jugaba al
+                  Call of Duty sin cansarme demasiado porque por las noches me
+                  sacaba el graduado. Cierto día jugando Fifa con unos amigos
+                  unos tipos me metieron en un lío y mi madre me decía una y
+                  otra vez: “¡Con tu tío y tu tía aprenderás Photoshop!”
+                </p>
+                <a className="btn btn-primary mb-5 mt-4" href="#">
+                  Quieres saber más de mí?
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+        <section className="py-5">
+          <div className="container text-center">
+            <div className="homeSection">
+              <div className="col-md-5 mx-auto d-flex flex-column justify-content-center">
+                <h1 className="mb-4 mt-5">Hazte un perfil</h1>
+                <h4>Y empieza a disfrutar de <span className="preguntasTitle">decenas</span> de entrevistas cada mes</h4>
+                <button className="btn btn-primary mt-5" role="button">
+                  Entrevista a tú manera
+                </button>
+              </div>
+              <div className="col-md-5 mx-auto">
+                <img src={superman} className="imgSobremi"></img>
+              </div>
+            </div>
+          </div>
+          </section>
+        <section className="py-5">
+          <div className="container text-center">
+            <div className="homeSection">
+              <div className="col-md-5 mx-auto">
+                <img src={contactUs} className="contactUs"></img>
+              </div>
+              <div className="col-md-5 mx-auto d-flex flex-column justify-content-center">
+                <h1 className="mb-4 mt-5">Quieres que te entrevistemos?</h1>
+                <h4>Si quieres <span className="preguntasTitle">compartir</span> algo con la comunidad, contáctanos y podemos agendar una entrevista</h4>
+                <button className="btn btn-primary mt-5 mb-5" role="button">
+                  Contáctanos
+                </button>
+              </div>
+            </div>
+          </div>
+          </section>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="pt-5">
-  <div class="container text-center">
-    <h2 class="mb-3">PiperNet Setup</h2>
-    <div class="row">
-      <div class="col-md-4 p-4">
-        <span class="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">1</span>
-        <h3>Move Data</h3>
-        <p>Using our Piper Assistant application, you can move your data to be stored our decentralized network with simple drag &amp; drop.</p>
-      </div>
-      <div class="col-md-4 p-4">
-        <span class="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">2</span>
-        <h3>Integrate Software</h3>
-        <p>We want to make sure that you can keep using the software that you use to manage your business.</p>
-      </div>
-      <div class="col-md-4 p-4">
-        <span class="d-inline-block rounded-circle px-4 py-3 bg-primary my-4">3</span>
-        <h3>Ongoing Support</h3>
-        <p>As with all innovative technologies, sometimes unpredictable things will happen, and you can always count on our support to solve issues for you.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="py-5">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-10 mx-auto">
-        <h1 class="mb-4">Bringing the Internet of the Future to the People</h1>
-        <p class="lead">Decentralized, secure, private. The PiperNet is on it's way to revolutionize every smartphone, PC, and smart-fridge near you.</p>
-        <a class="btn btn-primary mb-5 mt-3" href="#">Sign up with facebook</a>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 col-lg-3 p-4">
-        <img src="placeholder/icons/check.svg" alt=""/>
-        <h4 class="my-3">Security</h4>
-        <p>Your data is virtually unhackable compared to traditional net</p>
-      </div>
-      <div class="col-md-6 col-lg-3 p-4">
-        <img src="placeholder/icons/check.svg" alt=""/>
-        <h4 class="my-3">Privacy</h4>
-        <p>Nobody is tracking you when your activity when you use PiperNet</p>
-      </div>
-      <div class="col-md-6 col-lg-3 p-4">
-        <img src="placeholder/icons/check.svg" alt=""/>
-        <h4 class="my-3">Storage</h4>
-        <p>Store your data safely, and access it faster than ever</p>
-      </div>
-      <div class="col-md-6 col-lg-3 p-4">
-        <img src="placeholder/icons/check.svg" alt=""/>
-        <h4 class="my-3">Decentralization</h4>
-        <p>Decentralized design allows data to flow freely and efficiently</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-        <Card2/>
-        </div>
-
     );
 }
 

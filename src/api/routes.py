@@ -93,7 +93,7 @@ def preguntas():
         question = Question (text=body_text, interviewer_id = body_interviewer_id, category_id = body_category_id, user_id = user_id)
         db.session.add(question)
         db.session.commit()
-        return jsonify ({"message":"Pregunta enviada", "question": question.serialize()})
+        return jsonify ({"message":"Pregunta enviada", "question": question.serialize()}), 200
     else:
         return jsonify({"message": "Campo obligatorio no rellenado"}), 400
 
@@ -126,3 +126,108 @@ def editprofile():
         return jsonify ({"message":"Cambios guardados", "user": user.serialize()}), 200
     else:
         return jsonify({"message": "Inicie sesión"}), 400
+
+
+@api.route('/deletequestion', methods=['DELETE'])
+@jwt_required()
+def deletequestion():
+  
+    user_id = get_jwt_identity ()
+    body_question_id = request.json.get("id")
+    
+    getquestion = Question.query.get(body_question_id)
+    
+    
+    if getquestion:
+
+        db.session.delete(getquestion)
+
+        db.session.commit() #esto es para subirlo a la base de datos
+        
+   
+    
+        return jsonify ({"message": "Pregunta eliminada"}), 200
+    else: 
+        return jsonify ({"message": "Pregunta no eliminada"}), 400
+
+
+@api.route('/likes', methods=['POST'])
+@jwt_required()
+def likes():
+    user_id = request.json.get("user_id")
+    print ("@@@@@user_id", user_id)
+    body_question_id = request.json.get("id")   
+    print ("@@@@@body_question_id", body_question_id)
+    user = User.query.get (user_id)
+    print ("@@@@@user", user)
+    if body_question_id:
+        question = Question.query.get(body_question_id)
+        print ("@@@@@question", question)
+        if user not in question.likes:
+            question.likes.append (user)
+            db.session.commit()
+            return jsonify ({"Liked":True, "Dislike": False, "Troll": False}), 200
+        else:
+            question.likes = list(filter(lambda x:x.id != user.id, question.likes))
+            db.session.commit(),
+            return jsonify({"Liked": False, "Message": "ya le ha dado like"}), 400
+    else:
+        return jsonify({"Liked": False, "Message": "Falta ID de pregunta"}), 400
+
+
+@api.route('/dislikes', methods=['POST'])
+@jwt_required()
+def dislike():
+    user_id = request.json.get("user_id")
+    print ("@@@@@user_id", user_id)
+    body_question_id = request.json.get("id")   
+    print ("@@@@@body_question_id", body_question_id)
+    user = User.query.get (user_id)
+    print ("@@@@@user", user)
+    if body_question_id:
+        question = Question.query.get(body_question_id)
+        print ("@@@@@question", question)
+        if user not in question.dislikes:
+            question.dislikes.append (user)
+            db.session.commit()
+            return jsonify ({"Liked":False, "Dislike": True, "Troll": False}), 200
+        else:
+            question.dislikes = list(filter(lambda x:x.id != user.id, question.dislikes))
+            db.session.commit(),
+            return jsonify({"Dislike": False, "Message": "ya le ha dado dislike"}), 400
+    else:
+        return jsonify({"Dislike": False, "Message": "Falta ID de pregunta"}), 400
+
+
+
+@api.route('/trolls', methods=['POST'])
+@jwt_required()
+def trolls():
+    user_id = request.json.get("user_id")
+    print ("@@@@@user_id", user_id)
+    body_question_id = request.json.get("id")   
+    print ("@@@@@body_question_id", body_question_id)
+    user = User.query.get (user_id)
+    print ("@@@@@user", user)
+    if body_question_id:
+        question = Question.query.get(body_question_id)
+        print ("@@@@@question", question)
+        if user not in question.trolls:
+            question.trolls.append (user)
+            db.session.commit()
+            return jsonify ({"Liked":False, "Dislike": False, "Troll": True}), 200
+        else:
+            question.trolls = list(filter(lambda x:x.id != user.id, question.trolls))
+            db.session.commit(),
+            return jsonify({"Troll": False, "Message": "ya le ha dado troll"}), 400
+    else:
+        return jsonify({"Troll": False, "Message": "Falta ID de pregunta"}), 400
+
+
+@api.route('/getpreguntas', methods=['GET'])
+@jwt_required()
+def getpreguntas():
+    user_id = get_jwt_identity ()
+    preguntas = Question.query.filter_by(user_id = user_id).first()
+    print ("@@@@@@@@@@", preguntas)
+    return jsonify ({"Question": preguntas.serialize()}), 200

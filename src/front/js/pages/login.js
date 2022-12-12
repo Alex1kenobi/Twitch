@@ -4,38 +4,36 @@ import { Context } from "../store/appContext";
 
 import { useNavigate } from "react-router-dom";
 
+import { LoginTwitch } from "../component/loginTwitch";
+
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState("");
   const [user, setUser] = useState({});
   const [password2, setPassword2] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const loginNavigate = async (user) => {
-     try {
-     await actions.login(user);
-if (store.logged){
-      navigate("/entrevistas")}
-      else {
-        setError (store.message); 
+    try {
+      await actions.login(user);
+      if (store.logged) {
+        navigate("/entrevistas");
+      } else {
+        setError(store.message);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
-
   const verificarPasswords = (user) => {
-    console.log(user);
     // Verificamos si las constraseñas no coinciden
     if (user.password != password2) {
       // Si las constraseñas no coinciden mostramos un mensaje
       setError("La contraseña no coincide");
     } else {
       actions.register(user);
-      if (localStorage.getItem("token")){
-        navigate("/entrevistas")
+      if (localStorage.getItem("token")) {
+        navigate("/entrevistas");
       }
     }
   };
@@ -54,6 +52,7 @@ if (store.logged){
         </div>
         {/* <!-- Fin Mensajes de Verificación --> */}
 
+
         <div className="section">
           <div className="container">
             <div className="row full-height justify-content-center login-body">
@@ -69,6 +68,7 @@ if (store.logged){
                     id="reg-log"
                     name="reg-log"
                   />
+
                   <label htmlFor="reg-log"></label>
                   <div className="card-3d-wrap mx-auto">
                     <div className="card-3d-wrapper">
@@ -111,7 +111,7 @@ if (store.logged){
                             <button
                               className="btn mt-4"
                               onClick={() => {
-                                loginNavigate(user)
+                                loginNavigate(user);
                               }}
                             >
                               Enviar
@@ -133,7 +133,8 @@ if (store.logged){
                                 type="text"
                                 onChange={(e) => {
                                   setUser({
-                                    ...user, rol_id:2, // Esto del rol_id le pone rol "2" (usuario) a todo cristo
+                                    ...user,
+                                    rol_id: 2, // Esto del rol_id le pone rol "2" (usuario) a todo cristo
                                     username: e.target.value,
                                   });
                                 }}
@@ -185,8 +186,6 @@ if (store.logged){
                               />
                               <i className="input-icon fas fa-key"></i>
                             </div>
-
-                           
 
                             <p>{error}</p>
                             <button

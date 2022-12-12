@@ -12,24 +12,67 @@ export const InterviewerProfile = () => {
   const [selectcategory, setSelectcategory] = useState("");
   const [mensaje, setMensaje] = useState("");
 
+
+
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    // 👇️ toggle
+    setIsActive(current => !current);
+  };
+
+
+
+/*   Esto es para ponerlo en línea con el estilo
+const btnStyle = {
+    border: "5px solid pink",
+    background: "red",
+  };
+   */
+
+
+
+/* Este para intentarlo con los uste state
+
+const [disabledLike, setDisabledLike] = useState(false);
+  const [disabledDislike, setDisabledDislike] = useState(false);
+  const [disabledTroll, setDisabledTroll] = useState(false); */
+
+/* 
+  function handleClickLike() {
+    setDisabledLike(true);
+    setDisabledDislike(false)
+    setDisabledTroll(false);
+  }
+
+  function handleClickDislike() {
+    setDisabledLike(false);
+    setDisabledDislike(true)
+    setDisabledTroll(false);
+  }
+
+  function handleClickTroll() {
+    setDisabledLike(false);
+    setDisabledDislike(false)
+    setDisabledTroll(true);
+  }
+ */
+
+
+
   let { id } = useParams();
 
   useEffect(() => {
     actions.getEntrevistado(id);
   }, []);
-  console.log(store.categories);
 
   const handleQuestion = async () => {
-    await actions.preguntas(
-      store.entrevistado.id,
-      text,
-      selectcategory
-    );
+    await actions.preguntas(store.entrevistado.id, text, selectcategory);
     setText("");
     setSelectcategory("");
     setMensaje(store.message_response);
 
-  }
+  };
 
   return (
     <div>
@@ -59,114 +102,123 @@ export const InterviewerProfile = () => {
                 </div>
 
                 <div classname="needs-validation">
-                  {store.logged ? ( <>
-                  <div for="validationCustom04" class="form-label">
-                    <select
-                      class="form-select"
-                      aria-label="Floating label select example"
-                      id="validationCustom04"
-                      required
-                      value={selectcategory}
-                      onChange={(e) => {
-                        setSelectcategory(e.target.value);
-                      }}
-                    >
-                      <option selected disabled value="">
-                        Selecciona una opción
-                      </option>
-                      {store.categories.map((category) => {
-                        return (
-                          <>
-                            <option value={category.id}>{category.name}</option>
-                          </>
-                        );
-                      })}
-                    </select>
-                    <label for="floatingSelect"></label>
-                  </div>
+                  {store.logged ? (
+                    <>
+                      <div for="validationCustom04" class="form-label">
+                        <select
+                          class="form-select"
+                          aria-label="Floating label select example"
+                          id="validationCustom04"
+                          required
+                          value={selectcategory}
+                          onChange={(e) => {
+                            setSelectcategory(e.target.value);
+                          }}
+                        >
+                          <option selected disabled value="">
+                            Selecciona una opción
+                          </option>
+                          {store.categories.map((category) => {
+                            return (
+                              <>
+                                <option value={category.id}>
+                                  {category.name}
+                                </option>
+                              </>
+                            );
+                          })}
+                        </select>
+                        <label for="floatingSelect"></label>
+                      </div>
 
-                  <div class="form-floating">
-                    <textarea
-                      class="form-control"
-                      placeholder="Leave a comment here"
-                      id="floatingTextarea2"
-                      style={{ height: "100px" }}
-                      value={text}
-                      onChange={(e) => {
-                        setText(e.target.value);
-                      }}
-                    ></textarea>
-                    <label for="floatingTextarea2">Pon aquí tu pregunta</label>
-                  </div>
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Leave a comment here"
+                          id="floatingTextarea2"
+                          style={{ height: "100px" }}
+                          value={text}
+                          onChange={(e) => {
+                            setText(e.target.value);
+                          }}
+                        ></textarea>
+                        <label for="floatingTextarea2">
+                          Pon aquí tu pregunta
+                        </label>
+                      </div>
 
-                  <p>{mensaje}</p>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    onClick={ async () => {
-                      handleQuestion()
-                    }}
-                  >
-                    Enviar
-                  </button>
-                  </>
-) : ( <>
+                      <p>{mensaje}</p>
+                      <button
+                      
+                        type="submit"
+                        class="btn btn-primary"
+                        onClick={async () => {
+                          handleQuestion();
+                        }}
+                      >
+                        Enviar
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div for="validationCustom04" class="form-label">
+                        <select
+                          class="form-select"
+                          aria-label="Floating label select example"
+                          id="validationCustom04"
+                          required
+                          value={selectcategory}
+                          onChange={(e) => {
+                            setSelectcategory(e.target.value);
+                          }}
+                          disabled
+                        >
+                          <option selected disabled value="">
+                            Selecciona una opción
+                          </option>
+                          {store.categories.map((category) => {
+                            return (
+                              <>
+                                <option value={category.id}>
+                                  {category.name}
+                                </option>
+                              </>
+                            );
+                          })}
+                        </select>
+                        <label for="floatingSelect"></label>
+                      </div>
 
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Leave a comment here"
+                          id="floatingTextarea2"
+                          style={{ height: "100px" }}
+                          value={text}
+                          onChange={(e) => {
+                            setText(e.target.value);
+                          }}
+                          disabled
+                        ></textarea>
+                        <label for="floatingTextarea2">
+                          Inicia sesión para hacer una pregunta
+                        </label>
+                      </div>
 
-<div for="validationCustom04" class="form-label">
-                    <select
-                      class="form-select"
-                      aria-label="Floating label select example"
-                      id="validationCustom04"
-                      required
-                      value={selectcategory}
-                      onChange={(e) => {
-                        setSelectcategory(e.target.value);
-                      }}
-                    disabled>
-                      <option selected disabled value="">
-                        Selecciona una opción
-                      </option>
-                      {store.categories.map((category) => {
-                        return (
-                          <>
-                            <option value={category.id}>{category.name}</option>
-                          </>
-                        );
-                      })}
-                    </select>
-                    <label for="floatingSelect"></label>
-                  </div>
-
-                  <div class="form-floating">
-                    <textarea
-                      class="form-control"
-                      placeholder="Leave a comment here"
-                      id="floatingTextarea2"
-                      style={{ height: "100px" }}
-                      value={text}
-                      onChange={(e) => {
-                        setText(e.target.value);
-                      }}
-                      disabled
-                    ></textarea>
-                    <label for="floatingTextarea2">Inicia sesión para hacer una pregunta</label>
-                  </div>
-
-                  <p>{mensaje}</p>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    onClick={ async () => {
-                      handleQuestion()
-                    }}
-                    disabled>
-                    Enviar
-                  </button>
-
-</>
- 
-) }
+                      <p>{mensaje}</p>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        onClick={async () => {
+                          handleQuestion();
+                        }}
+                        disabled
+                      >
+                        Enviar
+                      </button>
+                    </>
+                  )}
                   <div>
                     {store.preguntas_entrevistado.length > 0 ? (
                       store.preguntas_entrevistado.map((indexPregunta) => {
@@ -183,31 +235,79 @@ export const InterviewerProfile = () => {
                                     {indexPregunta.category}
                                   </p>
                                 </>
+                                {store.logged ? (
+                                  <div class="input-group">
+                                    {}
+                                    <button
+                                      type="button"
+                                      style={{
+                                        backgroundColor: isActive ? 'salmon' : '',
+                                        color: isActive ? 'white' : '',
+                                      }}
+                                      class="btn btn-primary fas fa-thumbs-up"
+                                      onClick={() => {
+                                        actions.Likes(
+                                          indexPregunta.id,
+                                          store.user.id,
+                                          indexPregunta.interviewer_id
+                                        );
+                                        handleClick() /* Este hace que cambie el color...... Pero de todos! */
+                                        /* handleClickLike(); */
 
-                                <div class="input-group">
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary fas fa-thumbs-up"
-                                  >
-                                    Like
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary fas fa-thumbs-down"
-                                  >
-                                    Dislike
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary fas fa-meh-rolling-eyes"
-                                  >
-                                    Pregunta troll
-                                  </button>
+                                      }}
 
-                                  <a href="#" class="btn btn-primary">
-                                    Borrar Pregunta
-                                  </a>
-                                </div>
+                                    /* disabled={disabledLike} */>
+                                      Like
+                                    </button>
+                                    {indexPregunta.likes.length}
+
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary fas fa-thumbs-down"
+                                      onClick={() => {
+                                        actions.Dislikes(
+                                          indexPregunta.id,
+                                          store.user.id,
+                                          indexPregunta.interviewer_id
+                                        );/* handleClickDislike(likes); */
+                                      }}
+                                    /* disabled={disabledDislike} */
+                                    
+                                    >
+                                      Dislike
+                                    </button>
+                                    {indexPregunta.dislikes.length}
+
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary fas fa-thumbs-down"
+                                      onClick={() => {
+                                        actions.Trolls(
+                                          indexPregunta.id,
+                                          store.user.id,
+                                          indexPregunta.interviewer_id
+                                        );/* handleClickTroll(); */
+                                      }}
+                                    /* disabled={disabledTroll} */>
+                                      Troll / Repetido
+                                    </button>
+                                    {indexPregunta.trolls.length}
+
+                                    {store.user.id == indexPregunta.user_id ? (
+                                      <button
+                                        class="btn btn-primary"
+                                        onClick={() => {
+                                          actions.deletequestion(
+                                            indexPregunta.id,
+                                            indexPregunta.interviewer_id
+                                          );
+                                        }}
+                                      >
+                                        Borrar Pregunta
+                                      </button>
+                                    ) : null}
+                                  </div>
+                                ) : null}
                               </div>
                             </div>
                           </div>

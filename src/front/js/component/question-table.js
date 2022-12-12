@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../../styles/question-table.css";
 import { Context } from "../store/appContext";
 
 export const QuestionTable = () => {
   const { store, actions } = useContext(Context);
-  console.log(store.preguntas_perfil);
 
+useEffect (()=>{
+
+}, [])
+
+console.log(store.preguntas_current_user)
   return (
     <div class="padding">
       <div class="row container d-flex justify-content-center">

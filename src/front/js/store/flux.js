@@ -11,6 +11,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       preguntas_entrevistado: [],
       preguntas_current_user: [],
       message_response: null,
+      Liked: false,
+      Dislikes: false,
+      Troll: false,
     },
     actions: {
       login: async (user) => {
@@ -29,7 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             logged: data.logged,
             user: data.user,
             message: data.msg,
-            preguntas_current_user: data.user.questions,
           });
           // don't forget to return something, that is how the async resolves
         } catch (error) {
@@ -48,11 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          setStore({
+            setStore({
             logged: data.logged,
             user: data.user,
-            preguntas_current_user: data.user.questions,
           });
+
           // don't forget to return something, that is how the async resolves
         } catch (error) {
           console.log("Error loading message from backend", error);
@@ -180,6 +182,52 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      deletequestion: async (id, interviewer_id) => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/deletequestion",
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+              body: JSON.stringify({ id: id }),
+            }
+          );
+          const data = await resp.json();
+
+          getActions().getEntrevistado(interviewer_id);
+          setStore({
+            message: data.message,
+          });
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
+      getpreguntas: async () => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/getpreguntas", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          await setStore({ preguntas_current_user: data.Question });
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
       editUser: async (user) => {
         try {
           // fetching data from the backend
@@ -202,6 +250,97 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+
+      Likes: async (id, user_id, interviewer_id) => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/likes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+
+            body: JSON.stringify({
+              id:id,
+              user_id : user_id,
+            }),
+          });
+          const data = await resp.json();
+
+          await setStore({ Liked: data.Liked, Dislikes: data.Dislikes, Troll: data.Troll});
+          await getActions().getEntrevistado(interviewer_id);
+         
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
+      Dislikes: async (id, user_id, interviewer_id) => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/dislikes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+
+            body: JSON.stringify({
+              id:id,
+              user_id : user_id,
+            }),
+          });
+          const data = await resp.json();
+
+          await setStore({ Liked: data.Liked, Dislikes: data.Dislikes, Troll: data.Troll});
+          await getActions().getEntrevistado(interviewer_id);
+         
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
+      Trolls: async (id, user_id, interviewer_id) => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/trolls", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+
+            body: JSON.stringify({
+              id:id,
+              user_id : user_id,
+            }),
+          });
+          const data = await resp.json();
+
+          await setStore({ Liked: data.Liked, Dislikes: data.Dislikes, Troll: data.Troll});
+          await getActions().getEntrevistado(interviewer_id);
+         
+          // don't forget to return something, that is how the async resolves
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
+      },
+
+
+
+
+
+
+
+
+
+
 
       logout: () => {
         localStorage.clear();

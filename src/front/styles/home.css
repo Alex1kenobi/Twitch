@@ -126,6 +126,11 @@
 
 .contactUs{
   border-radius: 25px;
-  width: 25vw;
+  width: 100%;
   margin: 2vh 0vw;
+}
+.createProfile{
+  display: inline-block;
+  margin: 0 auto;
+  margin-bottom: 1vw;
 }

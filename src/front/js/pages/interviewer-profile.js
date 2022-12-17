@@ -13,8 +13,6 @@ export const InterviewerProfile = () => {
   const [selectcategory, setSelectcategory] = useState("");
   const [mensaje, setMensaje] = useState("");
 
-
-
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -22,50 +20,22 @@ export const InterviewerProfile = () => {
     setIsActive(current => !current);
   };
 
-
-
-/*   Esto es para ponerlo en línea con el estilo
-const btnStyle = {
-    border: "5px solid pink",
-    background: "red",
-  };
-   */
-
-
-
-/* Este para intentarlo con los uste state
-
-const [disabledLike, setDisabledLike] = useState(false);
-  const [disabledDislike, setDisabledDislike] = useState(false);
-  const [disabledTroll, setDisabledTroll] = useState(false); */
-
-/* 
-  function handleClickLike() {
-    setDisabledLike(true);
-    setDisabledDislike(false)
-    setDisabledTroll(false);
-  }
-
-  function handleClickDislike() {
-    setDisabledLike(false);
-    setDisabledDislike(true)
-    setDisabledTroll(false);
-  }
-
-  function handleClickTroll() {
-    setDisabledLike(false);
-    setDisabledDislike(false)
-    setDisabledTroll(true);
-  }
- */
-
-
-
   let { id } = useParams();
 
   useEffect(() => {
     actions.getEntrevistado(id);
   }, []);
+
+  const ordenLikes = store.preguntas_entrevistado.sort(function(a, b) {
+    if ((a.likes.length-a.dislikes.length) < (b.likes.length-b.dislikes.length)) {
+      return 1;
+    }
+    if ((a.likes.length-a.dislikes.length) > (b.likes.length-b.dislikes.length)) {
+      return -1;
+    }
+    return 0;
+  });
+  
 
   const handleQuestion = async () => {
     await actions.preguntas(store.entrevistado.id, text, selectcategory);
@@ -221,8 +191,8 @@ const [disabledLike, setDisabledLike] = useState(false);
                     </>
                   )}
                   <div>
-                    {store.preguntas_entrevistado.length > 0 ? (
-                      store.preguntas_entrevistado.map((indexPregunta) => {
+                    {ordenLikes.length > 0 ? (
+                      ordenLikes.map((indexPregunta) => {
                         return (
                           <div className="card-group">
                             <Likebar indexPregunta={indexPregunta} />

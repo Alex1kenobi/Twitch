@@ -11,10 +11,12 @@ export const Likebar = (props) => {
     setIsActive((current) => !current);
   };
 
+  const recuento = props.indexPregunta.likes.length-props.indexPregunta.dislikes.length
+
   return (
     <div class="card" style={{ width: "18rem" }}>
       <div class="card-body">
-        <>
+        <>{recuento}
           <h5 class="card-title">{props.indexPregunta.user}</h5>
           <p class="card-text">{props.indexPregunta.text}</p>
           <p class="card-text">{props.indexPregunta.category}</p>

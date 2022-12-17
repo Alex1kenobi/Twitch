@@ -1,13 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../styles/question-table.css";
 import { Context } from "../store/appContext";
 
 export const QuestionTable = () => {
   const { store, actions } = useContext(Context);
 
-useEffect (()=>{
+  const [preguntas, setPreguntas] = useState ()
 
-}, [])
+  useEffect(() => {
+    actions.getpreguntas();
+  }, []);
+
+  useEffect (()=>{
+setPreguntas (store.preguntas_current_user)
+}, [store.preguntas_current_user])
+
 
 console.log(store.preguntas_current_user)
   return (
@@ -31,8 +38,8 @@ console.log(store.preguntas_current_user)
                     </tr>
                   </thead>
                   <tbody>
-                    {store.preguntas_current_user.length > 0
-                      ? store.preguntas_current_user.map((cadapregunta) => {
+                    
+                    {preguntas && preguntas.map((cadapregunta) => {
                           return (
                             <tr>
                               <td>{cadapregunta.interviewer}</td>
@@ -41,7 +48,7 @@ console.log(store.preguntas_current_user)
                             </tr>
                           );
                         })
-                      : null}
+                      }
                   </tbody>
                 </table>
               </div>

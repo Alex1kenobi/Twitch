@@ -228,6 +228,7 @@ def trolls():
 @jwt_required()
 def getpreguntas():
     user_id = get_jwt_identity ()
-    preguntas = Question.query.filter_by(user_id = user_id).first()
+    preguntas = Question.query.filter_by(user_id = user_id).all()
     print ("@@@@@@@@@@", preguntas)
-    return jsonify ({"Question": preguntas.serialize()}), 200
+    #return jsonify ({"Question": preguntas.serialize()}), 200
+    return jsonify ({"Question": list(map(lambda x:x.serialize(), preguntas))}), 200

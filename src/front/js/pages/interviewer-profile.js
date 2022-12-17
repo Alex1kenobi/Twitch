@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 
 import "../../styles/responsive.css";
 import "../../styles/interviewer-profile.css";
+import { Likebar } from "../component/like-bar";
 
 export const InterviewerProfile = () => {
   const { store, actions } = useContext(Context);
@@ -224,92 +225,7 @@ const [disabledLike, setDisabledLike] = useState(false);
                       store.preguntas_entrevistado.map((indexPregunta) => {
                         return (
                           <div className="card-group">
-                            <div class="card" style={{ width: "18rem" }}>
-                              <div class="card-body">
-                                <>
-                                  <h5 class="card-title">
-                                    {indexPregunta.user}
-                                  </h5>
-                                  <p class="card-text">{indexPregunta.text}</p>
-                                  <p class="card-text">
-                                    {indexPregunta.category}
-                                  </p>
-                                </>
-                                {store.logged ? (
-                                  <div class="input-group">
-                                    {}
-                                    <button
-                                      type="button"
-                                      style={{
-                                        backgroundColor: isActive ? 'salmon' : '',
-                                        color: isActive ? 'white' : '',
-                                      }}
-                                      class="btn btn-primary fas fa-thumbs-up"
-                                      onClick={() => {
-                                        actions.Likes(
-                                          indexPregunta.id,
-                                          store.user.id,
-                                          indexPregunta.interviewer_id
-                                        );
-                                        handleClick() /* Este hace que cambie el color...... Pero de todos! */
-                                        /* handleClickLike(); */
-
-                                      }}
-
-                                    /* disabled={disabledLike} */>
-                                      Like
-                                    </button>
-                                    {indexPregunta.likes.length}
-
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary fas fa-thumbs-down"
-                                      onClick={() => {
-                                        actions.Dislikes(
-                                          indexPregunta.id,
-                                          store.user.id,
-                                          indexPregunta.interviewer_id
-                                        );/* handleClickDislike(likes); */
-                                      }}
-                                    /* disabled={disabledDislike} */
-                                    
-                                    >
-                                      Dislike
-                                    </button>
-                                    {indexPregunta.dislikes.length}
-
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary fas fa-thumbs-down"
-                                      onClick={() => {
-                                        actions.Trolls(
-                                          indexPregunta.id,
-                                          store.user.id,
-                                          indexPregunta.interviewer_id
-                                        );/* handleClickTroll(); */
-                                      }}
-                                    /* disabled={disabledTroll} */>
-                                      Troll / Repetido
-                                    </button>
-                                    {indexPregunta.trolls.length}
-
-                                    {store.user.id == indexPregunta.user_id ? (
-                                      <button
-                                        class="btn btn-primary"
-                                        onClick={() => {
-                                          actions.deletequestion(
-                                            indexPregunta.id,
-                                            indexPregunta.interviewer_id
-                                          );
-                                        }}
-                                      >
-                                        Borrar Pregunta
-                                      </button>
-                                    ) : null}
-                                  </div>
-                                ) : null}
-                              </div>
-                            </div>
+                            <Likebar indexPregunta={indexPregunta} />
                           </div>
                         );
                       })

@@ -7,6 +7,7 @@ import { Login } from "./pages/login";
 import { UserProfile } from "./pages/user-profile";
 import { Interview } from "./pages/interview";
 import { InterviewerProfile } from "./pages/interviewer-profile"
+import { Contact } from "./pages/contact"
 
 import { Context } from "./store/appContext"
 
@@ -37,6 +38,7 @@ const Layout = () => {
                         <Route element={<InterviewerProfile/>} path="/entrevistas/:id/:name"/> {/* Este name es el que se relaciona con el Useparams */}
                         {/* <Route element={store.logged ? (<UserProfile />): <Navigate to = "/login"> </Navigate>} path="/user-profile" /> */}
                         <Route element={<UserProfile />} path="/user-profile" />
+                        <Route element={<Contact />} path="/contact" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

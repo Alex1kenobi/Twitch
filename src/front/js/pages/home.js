@@ -88,7 +88,7 @@ export const Home = () => {
               <h2 className="my-5">Próximas Entrevistas</h2>
 
               <div className="col-md-5 mx-auto mb-3">
-                <Card/>
+                <Card />
               </div>
             </div>
           </div>
@@ -113,18 +113,17 @@ export const Home = () => {
                   sodales turpis sed leo gravida, ac viverra nulla sodales.
                   Fusce in varius dui. Donec iaculis, ipsum placerat scelerisque
                   volutpat, lacus elit luctus dolor, sed tempus orci nunc et
-                  nunc. Mauris facilisis lobortis lacus hendrerit porta. 
+                  nunc. Mauris facilisis lobortis lacus hendrerit porta.
                   <br></br>
                   <br></br>
-                  Pellentesque habitant morbi
-                  tristique senectus et netus et malesuada fames ac turpis
-                  egestas. Vestibulum suscipit, massa at congue ornare, arcu
-                  orci venenatis augue, vitae auctor tortor ipsum a tortor.
-                  Nullam egestas risus non erat finibus, non gravida eros
-                  scelerisque. Ut eros ante, vestibulum vitae suscipit sodales,
-                  elementum vitae purus. Curabitur id tincidunt lacus. Maecenas
-                  non magna lorem. Ut accumsan id odio vel iaculis. Donec non
-                  euismod sem, vel semper ipsum.
+                  Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Vestibulum suscipit, massa
+                  at congue ornare, arcu orci venenatis augue, vitae auctor
+                  tortor ipsum a tortor. Nullam egestas risus non erat finibus,
+                  non gravida eros scelerisque. Ut eros ante, vestibulum vitae
+                  suscipit sodales, elementum vitae purus. Curabitur id
+                  tincidunt lacus. Maecenas non magna lorem. Ut accumsan id odio
+                  vel iaculis. Donec non euismod sem, vel semper ipsum.
                 </p>
               </div>
               <div className="col-md-5 mx-auto">
@@ -144,9 +143,11 @@ export const Home = () => {
                   algo con la comunidad, contáctanos y podemos agendar una
                   entrevista
                 </h4>
-                <button className="btn btn-primary mt-5 mb-5" role="button">
-                  Contáctanos
-                </button>
+                <a href="/contact" className="homeContactBtn">
+                  <button className="btn btn-primary mt-5 mb-5" role="button">
+                    Contáctanos
+                  </button>
+                </a>
               </div>
               <div className="col-md-5">
                 <img src={contactUs} className="contactUs"></img>
@@ -183,7 +184,6 @@ export const Home = () => {
             </div>
           </div>
         </section>
-
       </div>
     );
 }

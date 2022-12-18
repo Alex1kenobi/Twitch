@@ -129,8 +129,12 @@
   width: 100%;
   margin: 2vh 0vw;
 }
+.homeContactBtn {
+  text-decoration: none;  
+}
 .createProfile{
   display: inline-block;
   margin: 0 auto;
   margin-bottom: 1vw;
 }
+

@@ -15,8 +15,12 @@ p {
     margin: 20px auto;
 }
 
+.profileContainer{
+    margin: 10vh auto;
+}
+
 .box {
-    background-color: #e1f5fe;
+    background-color: rgba(16, 10, 31, 0.7);
     padding: 30px;
     border-radius: 10px;
 }
@@ -34,7 +38,7 @@ p {
 }
 
 .blue {
-    color: #2196F3;
+    color: #3452FF;
     font-size: 30px;
 }
 
@@ -59,6 +63,7 @@ p {
 
 .h-dash {
     font-size: 25px;
+    color: white;
 }
 
 .textmuted {

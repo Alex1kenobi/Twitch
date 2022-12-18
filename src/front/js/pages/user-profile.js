@@ -61,65 +61,65 @@ export const UserProfile = () => {
 
   return (
     <section>
-      <div class="container">
-        <div class="box">
-          <p class="h-dash">Tu perfil</p>
-          <p class="fst-italic textmuted">Área privada</p>
-          <div class="row mx-0 mt-2">
-            <div class="col-md-4 p-0 border-end">
-              <div class="viewbox">
+      <div className="container profileContainer">
+        <div className="box">
+          <p className="h-dash">Tu perfil</p>
+          <p className="fst-italic textmuted">Área privada</p>
+          <div className="row mx-0 mt-2">
+            <div className="col-md-4 p-0 border-end">
+              <div className="viewbox">
                 <p>Preguntas que has hecho</p>
-                <p class="blue">{store.preguntas_current_user.length}</p>
+                <p className="blue">{store.preguntas_current_user.length}</p>
               </div>
             </div>
-            <div class="col-md-4 p-0 border-end">
-              <div class="viewbox">
-                <p class="blue">8</p>
+            <div className="col-md-4 p-0 border-end">
+              <div className="viewbox">
+                <p className="blue">8</p>
                 <p>Preguntas aprobadas</p>
               </div>
             </div>
-            <div class="col-md-4 p-0">
-              <div class="viewbox">
-                <p class="blue">1</p>
+            <div className="col-md-4 p-0">
+              <div className="viewbox">
+                <p className="blue">1</p>
                 <p>Entrevistas en las que has participado</p>
               </div>
             </div>
           </div>
           <div>
-            <div class="box2 mt-3">
-              <div class="d-flex mt-2 ">
-                <span class="fas fa-users-cog mt-1"></span>
-                <div class="w-100 border-bottom">
-                  <p class="">Mi perfil</p>
-                  <p class="textmuted mb-2">Acceso a tus datos y contraseña</p>
-                  <div class="container">
-                    <div class="container rounded bg-white mt-5">
-                      <div class="row">
-                        <div class="col-md-4 border-right">
-                          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <div className="box2 mt-3">
+              <div className="d-flex mt-2 ">
+                <span className="fas fa-users-cog mt-1"></span>
+                <div className="w-100 border-bottom">
+                  <p className="textmuted">Mi perfil</p>
+                  <p className="textmuted mb-2">Acceso a tus datos y contraseña</p>
+                  <div className="container">
+                    <div className="container rounded bg-white mt-5">
+                      <div className="row">
+                        <div className="col-md-4 border-right">
+                          <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                             <img
-                              class="rounded-circle mt-5"
+                              className="rounded-circle mt-5"
                               src="https://i.imgur.com/0eg0aG0.jpg"
                               width="90"
                             />
-                            <span class="font-weight-bold">
+                            <span className="font-weight-bold">
                               {store.user.username}
                             </span>
-                            <span class="text-black-50">
+                            <span className="text-black-50">
                               {store.user.email}
                             </span>
                           </div>
                         </div>
-                        <div class="col-md-8">
-                          <div class="p-3 py-5">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                              <div class="d-flex flex-row align-items-center back"></div>
+                        <div className="col-md-8">
+                          <div className="p-3 py-5">
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                              <div className="d-flex flex-row align-items-center back"></div>
                             </div>
-                            <div class="row mt-2">
-                              <div class="col-md-6">
+                            <div className="row mt-2">
+                              <div className="col-md-6">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="Nombre de usuario"
                                   defaultValue={store.user.username}
                                   onChange={(e) =>
@@ -131,11 +131,11 @@ export const UserProfile = () => {
                                 />
                               </div>
                             </div>
-                            <div class="row mt-3">
-                              <div class="col-md-6">
+                            <div className="row mt-3">
+                              <div className="col-md-6">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   defaultValue={store.user.email}
                                   placeholder="Email"
                                   onChange={(e) =>
@@ -144,11 +144,11 @@ export const UserProfile = () => {
                                 />
                               </div>
                             </div>
-                            <div class="row mt-3">
-                              <div class="col-md-6">
+                            <div className="row mt-3">
+                              <div className="col-md-6">
                                 <input
                                   type="password"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="Cambia contraseña"
                                   onChange={(e) =>
                                     setUser({
@@ -159,20 +159,20 @@ export const UserProfile = () => {
                                 />
                               </div>
                             </div>
-                            <div class="row mt-3">
-                              <div class="col-md-6">
+                            <div className="row mt-3">
+                              <div className="col-md-6">
                                 <input
                                   type="password"
-                                  class="form-control"
+                                  className="form-control"
                                   onChange={(e) => setPassword2(e.target.value)}
                                   placeholder="Confirmar Contraseña"
                                 />
                               </div>
                             </div>
                             <p>{error}</p>
-                            <div class="mt-5 text-right">
+                            <div className="mt-5 text-right">
                               <button
-                                class="btn btn-primary profile-button"
+                                className="btn btn-primary profile-button"
                                 type="button"
                                 onClick={() => {
                                   verificarPasswords(user);
@@ -188,11 +188,11 @@ export const UserProfile = () => {
                   </div>
                 </div>
               </div>
-              <div class="d-flex mt-2">
-                <span class="fas fa-bookmark ms-0 mt-1"></span>
-                <div class="w-100 ps-2">
-                  <p class="">Mis interacciones</p>
-                  <p class="textmuted mb-2">
+              <div className="d-flex mt-2">
+                <span className="fas fa-bookmark ms-0 mt-1"></span>
+                <div className="w-100 ps-2">
+                  <p className="">Mis interacciones</p>
+                  <p className="textmuted mb-2">
                     Registro de preguntas y a quien se las hiciste
                   </p>
                 </div>

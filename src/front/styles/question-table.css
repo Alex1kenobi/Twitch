@@ -20,17 +20,17 @@ body {
     padding: 5rem;
   }
   .card {
-    box-shadow: none;
+    /* box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-    -ms-box-shadow: none;
+    -ms-box-shadow: none; */
   }
   .pl-3,
   .px-3 {
     padding-left: 1rem !important;
   }
   .card {
-    position: relative;
+    /* position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -39,7 +39,7 @@ body {
     background-clip: border-box;
     border: 1px solid #d2d2dc;
     border-radius: 0;
-    width: 200rem;
+    width: 200rem; */
   }
   .card .card-title {
     color: #000000;

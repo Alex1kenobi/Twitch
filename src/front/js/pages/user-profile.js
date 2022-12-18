@@ -64,7 +64,6 @@ export const UserProfile = () => {
       <div className="container profileContainer">
         <div className="box">
           <p className="h-dash">Tu perfil</p>
-          <p className="fst-italic textmuted">Área privada</p>
           <div className="row mx-0 mt-2">
             <div className="col-md-4 p-0 border-end">
               <div className="viewbox">

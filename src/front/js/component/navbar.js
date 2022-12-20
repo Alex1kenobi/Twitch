@@ -4,8 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
 import Logo from "../../img/a1k-entero.png";
-import "../../styles/navbar.css";
-import Logo from "../../img/a1k-entero.png";
+
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);

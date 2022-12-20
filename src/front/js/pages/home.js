@@ -9,14 +9,6 @@ import sobremi from '../../img/home/sobremi.png';
 import superman from '../../img/home/superman2.png';
 import contactUs from '../../img/home/contactUs.jpg';
 
-import {Card} from "../component/card"
-import {Card2} from "../component/card2"
-import "../../styles/webBackground.css"
-import heroImg from '../../img/home/interview-set.jpg';
-import sobremi from '../../img/home/sobremi.png';
-import superman from '../../img/home/superman2.png';
-import contactUs from '../../img/home/contactUs.jpg';
-
 
 export const Home = () => {
     return (

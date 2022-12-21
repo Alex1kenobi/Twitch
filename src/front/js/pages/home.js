@@ -27,7 +27,7 @@ export const Home = () => {
               Vota por la pregunta que quieras escuchar o haz tus propias
               preguntas
             </p>
-            <a href="#createProfilebtn">
+            <a href="#createProfilebtn" className="aLinkCallToAction">
               <button className="callToAction" role="button">
                 Entrevista a tú manera
               </button>

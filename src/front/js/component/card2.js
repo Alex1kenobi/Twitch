@@ -13,33 +13,10 @@ export const Card2 = () => {
 
   return (
     <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-8 col-lg-6">
-          {/* <!-- Section Heading--> */}
-          <div
-            className="section_heading text-center wow fadeInUp"
-            data-wow-delay="0.2s"
-            style={{
-              visibility: "visible",
-              animationDelay: "0.2s",
-              animationName: "fadeInUp",
-            }}
-          >
-            <h3>
-              Our Creative <span> Team</span>
-            </h3>
-            <p>
-              Appland is completely creative, lightweight, clean &amp; super
-              responsive app landing page.
-            </p>
-            <div className="line"></div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
+      <div className="row justify-content-around">
         {store.entrevistados.map((invitado) => {
           return (
-            <div className="col-12 col-sm-6 col-lg-3">
+            <div className="col-12 col-sm-6 col-lg-3 mt-5 mx-2">
               <div
                 className="single_advisor_profile wow fadeInUp"
                 data-wow-delay="0.2s"

@@ -123,7 +123,6 @@ def editprofile():
         body_password = request.json.get("password")
         if body_password == "" or body_password == None:
             body_password = user.password
-
         user.username = body_username
         user.email = body_email
         user.password = body_password
@@ -237,3 +236,14 @@ def getpreguntas():
     print ("@@@@@@@@@@", preguntas)
     #return jsonify ({"Question": preguntas.serialize()}), 200
     return jsonify ({"Question": list(map(lambda x:x.serialize(), preguntas))}), 200
+
+
+@api.route('/done', methods=['PUT'])
+@jwt_required()
+def done():
+    body_question_id = request.json.get("id") #pillar el ID del front
+    question = Question.query.get (body_question_id) #esto me busca la pregunta en si
+    body_done = request.json.get("done")
+    question.done = body_done
+    db.session.commit() 
+    return jsonify ({"message":"Cambios guardados", "Question": question.serialize()}), 200

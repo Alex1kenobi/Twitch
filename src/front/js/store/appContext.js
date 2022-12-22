@@ -25,7 +25,7 @@ const injectContext = PassedComponent => {
 
 			state.actions.verify()
 			state.actions.getroles()
-			state.actions.getcategories()
+			
 			
 			/**
 			 * EDIT THIS!

@@ -233,7 +233,6 @@ def trolls():
 def getpreguntas():
     user_id = get_jwt_identity ()
     preguntas = Question.query.filter_by(user_id = user_id).all()
-    print ("@@@@@@@@@@", preguntas)
     #return jsonify ({"Question": preguntas.serialize()}), 200
     return jsonify ({"Question": list(map(lambda x:x.serialize(), preguntas))}), 200
 
@@ -247,3 +246,4 @@ def done():
     question.done = body_done
     db.session.commit() 
     return jsonify ({"message":"Cambios guardados", "Question": question.serialize()}), 200
+    

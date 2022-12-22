@@ -98,35 +98,27 @@ export const Likebar = (props) => {
             ) : null}
           </div>
         ) : null}
-        {
-store.user.rol == 1 ? (
-
-  !done ? (
-    <button
-      onClick={() => {
-        actions.done(props.indexPregunta.id, true);
-        setDone(true)
-      }}
-    >
-      Hecho
-    </button>
-  ) : (
-    <button
-      onClick={() => {
-        actions.done(props.indexPregunta.id, false);
-        setDone(false)
-      }}
-    >
-      Deshacer
-    </button>
-  )
-
-
-
-) : null
-
-        }
-        
+        {store.user.rol == 1 ? (
+          !done ? (
+            <button
+              onClick={() => {
+                actions.done(props.indexPregunta.id, true);
+                setDone(true);
+              }}
+            >
+              Hecho
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                actions.done(props.indexPregunta.id, false);
+                setDone(false);
+              }}
+            >
+              Deshacer
+            </button>
+          )
+        ) : null}
       </div>
     </div>
   );
